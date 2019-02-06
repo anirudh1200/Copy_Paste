@@ -6,3 +6,5 @@ const pasteSchema = new mongoose.Schema({
         required: true
     }
 });
+
+modeule.exports = mongoose.model('Paste', pasteScheme);
