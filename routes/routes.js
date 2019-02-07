@@ -12,9 +12,10 @@ router.get('/api/download', (req, res) => {
 
 router.post('/api/upload', (req, res) => {
     // Create a new file containing the data
-    const filePath = path.resolve(__dirname, '/../files/') + req.body.url;
-    fs.writeFile(filePath ,res.body.data, (err) => console.log(err));
+    const filePath = path.resolve(__dirname + '/../files/', req.body.url + '.txt');
+    fs.writeFile(filePath ,req.body.data, (err) => console.log(err));
     // Add url to database
+    console.log(req.body);
     const newPaste = new Paste({
         url: req.body.url
     });
