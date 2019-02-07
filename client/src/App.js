@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import './App.css';
+import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import PasteList from './components/list/PasteList';
+import UploadForm from './components/forms/upload';
 
 class App extends Component {
 
@@ -9,7 +10,10 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar />
-        <PasteList />
+        <Switch>
+          <Route exact path='/' component={PasteList} />
+          <Route path='/upload' component={UploadForm} />
+        </Switch>
       </div>
     );
   }
