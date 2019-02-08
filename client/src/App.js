@@ -14,6 +14,11 @@ class App extends Component {
           <Route exact path='/' component={PasteList} />
           <Route path='/upload' component={UploadForm} />
         </Switch>
+        <span style={{position:'absolute', bottom:0}}>
+          Made with
+          <span role="img" aria-label="heart">❤️</span>
+          by anirudh1200
+        </span>
       </div>
     );
   }

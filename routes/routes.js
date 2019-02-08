@@ -24,4 +24,21 @@ router.post('/api/upload', (req, res) => {
         .catch(console.log);
 });
 
+router.get('/api/download/:url', (req, res) => {
+    const fileName = req.params.url + '.txt';
+    // Get file path
+    const file = path.resolve(__dirname + '/../files/', req.params.url + '.txt');
+    fs.exists(file,function(exists){
+        if(exists){
+            res.setHeader('Content-disposition', 'attachment; filename=' + fileName);
+            res.setHeader('Content-Type', 'application/document/txt');
+            let rstream = fs.createReadStream(file);
+            rstream.pipe(res);
+        } else {
+            res.json({success: false});
+            res.end();
+        }
+    });
+});
+
 module.exports = router;

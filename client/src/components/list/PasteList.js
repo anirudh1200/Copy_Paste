@@ -12,6 +12,10 @@ class PasteList extends Component {
         this.props.history.push('/upload');
     }
 
+    downloadFile = (url) => {
+        fetch(`/api/download/${url}`);
+    }
+
     render(){
         let backgroundColor = grey[900];
         return(
@@ -25,6 +29,7 @@ class PasteList extends Component {
                                     <IndivisualItem
                                       paste={paste}
                                       key={index}
+                                      downloadFile={this.downloadFile}
                                     />
                                 )
                             })

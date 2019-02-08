@@ -12,7 +12,8 @@ class UploadForm extends Component{
     state = {
         pasteData: '',
         url: '',
-        date: formatDate(new Date())
+        date: formatDate(new Date()),
+        status: ''
     }
 
     handleChange = e => {
@@ -20,21 +21,35 @@ class UploadForm extends Component{
     }
 
     handleSubmit = () => {
-        let data = {...this.state};
-        fetch("/api/upload",{
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json;charset=UTF-8"
-            },
-            body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(res => {
-            if(res.success){
-                this.props.history.push('/');
-            }
-        })
-        .catch(console.log);
+        if(this.validateForm()){
+            let data = {...this.state};
+            fetch("/api/upload",{
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json;charset=UTF-8"
+                },
+                body: JSON.stringify(data)
+            })
+            .then(res => res.json())
+            .then(res => {
+                if(res.success){
+                    this.props.history.push('/');
+                }
+            })
+            .catch(console.log);
+        }
+    }
+
+    validateForm = () => {
+        if(!this.state.pasteData){
+            this.setState({status: '* Your Paste Connot Be Empty'})
+            return false;
+        }
+        if(!this.state.url){
+            this.setState({status: '* Please Enter URL'})
+            return false;
+        }
+        return true;
     }
 
     render(){
@@ -74,6 +89,7 @@ class UploadForm extends Component{
                       margin="none"
                     />
                     <div style={{marginTop: '2%', textAlign: 'center'}}>
+                        <div style={{color: 'red'}}>{this.state.status}</div>
                         <Consumer>
                             {({updatePasteList}) => {
                                 return(

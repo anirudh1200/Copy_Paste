@@ -9,7 +9,10 @@ const IndivisualItem = props => {
     const {paste} = props;
     console.log(paste);
     return(
-        <ListItem style={{marginBottom: '2%'}}>
+        <ListItem
+          style={{marginBottom: '2%'}}
+          onClick={() => props.downloadFile(paste.url)}
+        >
             <ListItemAvatar>
                 < Avatar>
                     <AssignmentIcon />

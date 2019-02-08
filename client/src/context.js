@@ -4,9 +4,7 @@ const Context = React.createContext();
 
 export class Provider extends Component{
     state = {
-        pasteList: [],
-        history: '',
-        historyPresent: 0
+        pasteList: []
     }
 
     componentDidMount(){
@@ -19,21 +17,11 @@ export class Provider extends Component{
         this.setState({pasteList: [...this.state.pasteList, newPaste]});
     }
 
-    updateHistory = (history) => {
-        this.setState({history});
-    }
-
-    updateHistoryPresent = () => {
-        this.setState({historyPresent: 1})
-    }
-
     render(){
         return(
             <Context.Provider value={{
                 ...this.state,
-                updatePasteList: this.updatePasteList,
-                updateHistory: this.updateHistory,
-                updateHistoryPresent: this.updateHistoryPresent
+                updatePasteList: this.updatePasteList
             }}>
                 {this.props.children}
             </Context.Provider>
