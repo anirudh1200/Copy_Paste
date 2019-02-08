@@ -16,6 +16,7 @@ const IndivisualItem = props => {
                 </Avatar>
             </ListItemAvatar>
         <ListItemText
+          style={{letterSpacing: '0.05em'}}
           primary={paste.url}
           secondary={paste.date}
         />

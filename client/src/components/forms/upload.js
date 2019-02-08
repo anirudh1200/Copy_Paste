@@ -5,6 +5,7 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import Typography from '@material-ui/core/Typography';
 import grey from '@material-ui/core/colors/grey';
 import formatDate from '../../utils/date';
+import { Consumer } from '../../context';
 
 class UploadForm extends Component{
 
@@ -73,15 +74,26 @@ class UploadForm extends Component{
                       margin="none"
                     />
                     <div style={{marginTop: '2%', textAlign: 'center'}}>
-                        <Fab
-                          variant="extended"
-                          aria-label="Delete"
-                          style={{color: grey[50],backgroundColor: grey[800]}}
-                          onClick={this.handleSubmit}
-                        >
-                            <NavigationIcon style={{color: grey[50]}} />
-                            Upload
-                        </Fab>
+                        <Consumer>
+                            {({updatePasteList}) => {
+                                return(
+                                    <Fab
+                                      variant="extended"
+                                      aria-label="Delete"
+                                      style={{color: grey[50],backgroundColor: grey[800]}}
+                                      onClick={() => {
+                                          let {url, date} = this.state;
+                                          console.log(url, date);
+                                          this.handleSubmit();
+                                          updatePasteList({url, date});
+                                      }}
+                                    >
+                                      <NavigationIcon style={{color: grey[50]}} />
+                                      Upload
+                                    </Fab>
+                                )
+                            }}
+                        </Consumer>
                     </div>
                 </form>
             </Fragment>
