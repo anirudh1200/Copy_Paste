@@ -16,8 +16,8 @@ const IndivisualItem = props => {
                 </Avatar>
             </ListItemAvatar>
         <ListItemText
-          primary="Single-line item"
-          secondary={"secondary"}
+          primary={paste.url}
+          secondary={paste.date}
         />
         </ListItem>
     )

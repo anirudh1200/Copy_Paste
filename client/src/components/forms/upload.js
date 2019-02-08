@@ -4,12 +4,14 @@ import Fab from '@material-ui/core/Fab';
 import NavigationIcon from '@material-ui/icons/Navigation';
 import Typography from '@material-ui/core/Typography';
 import grey from '@material-ui/core/colors/grey';
+import formatDate from '../../utils/date';
 
 class UploadForm extends Component{
 
     state = {
         pasteData: '',
-        url: ''
+        url: '',
+        date: formatDate(new Date())
     }
 
     handleChange = e => {
@@ -17,7 +19,21 @@ class UploadForm extends Component{
     }
 
     handleSubmit = () => {
-        console.log(this.state);
+        let data = {...this.state};
+        fetch("/api/upload",{
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json;charset=UTF-8"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(res => {
+            if(res.success){
+                this.props.history.push('/');
+            }
+        })
+        .catch(console.log);
     }
 
     render(){
