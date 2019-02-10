@@ -18,7 +18,7 @@ const styles = {
 
 function SimpleAppBar(props) {
   const { classes } = props;
-  let backgroundColor = grey[800];
+  let backgroundColor = grey[900];
   return (
     <div className={classes.root}>
       <AppBar position="static" style={{backgroundColor}}>
