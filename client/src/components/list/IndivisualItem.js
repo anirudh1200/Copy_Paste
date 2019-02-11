@@ -5,6 +5,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import grey from '@material-ui/core/colors/grey';
+import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import ZoomOutMap from '@material-ui/icons/ZoomOutMap';
 
 class IndivisualItem extends Component {
 
@@ -12,21 +14,43 @@ class IndivisualItem extends Component {
         isHovered: false
     }
     
-    downloadFile = (url) => {
+    downloadFile = (type) => {
         // An option
         // window.location = `http://localhost:5000/api/download/${url}`;
         // Second approach
-        fetch(`http://localhost:5000/api/download/${url}`)
+        let url = this.props.paste.url;
+        if(type === '.txt'){
+            fetch(`http://localhost:5000/api/download/${url}`)
             .then(res => res.blob())
             .then(blob => {
                 let Url = window.URL.createObjectURL(blob);
                 let a = document.createElement('a');
                 a.href = Url;
-                a.download = url + '.txt';
+                a.download = url + type;
                 document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
                 a.click();    
                 a.remove();  //afterwards we remove the element again         
-            });
+            })
+            .catch(console.log);
+        } else {
+            fetch(`http://localhost:5000/api/downloadpdf/${url}`)
+            .then(res => res.blob())
+            .then(blob => {
+                let Url = window.URL.createObjectURL(blob);
+                let a = document.createElement('a');
+                a.href = Url;
+                a.download = url + type;
+                document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+                a.click();    
+                a.remove();  //afterwards we remove the element again         
+            })
+            .catch(console.log);
+        }
+
+    }
+
+    redirect = () => {
+
     }
 
     handleMouseEnter = () => {
@@ -39,12 +63,12 @@ class IndivisualItem extends Component {
 
     render(){
         const {paste} = this.props;
-        let listItemStyle
+        let listItemStyle;
         this.state.isHovered ? (listItemStyle = {backgroundColor: grey[200], margin: '0.5%'}) : (listItemStyle = {margin: '0.5%'});
+        let iconStyle = {width:'8%', margin: 'auto'};
         return(
             <ListItem
               style={listItemStyle}
-              onClick={() => this.downloadFile(paste.url)}
               onMouseEnter={this.handleMouseEnter}
               onMouseLeave={this.handleMouseLeave}
             >
@@ -57,6 +81,18 @@ class IndivisualItem extends Component {
               style={{letterSpacing: '0.05em'}}
               primary={paste.url}
               secondary={paste.date}
+            />
+            <ArrowDownward
+              style={iconStyle}
+              onClick={() => this.downloadFile('.txt')}
+            />
+            <ArrowDownward
+              style={iconStyle}
+              onClick={() => this.downloadFile('.pdf')}
+            />
+            <ZoomOutMap
+              style={iconStyle}
+              onClick={() => this.redirect()}
             />
             </ListItem>
         )

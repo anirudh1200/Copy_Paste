@@ -8,7 +8,7 @@ export class Provider extends Component{
     }
 
     componentDidMount(){
-        fetch('/api/download')
+        fetch('http://localhost:5000/api/download')
             .then(res => res.json())
             .then(res => this.setState({pasteList: res}));
     }
