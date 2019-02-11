@@ -5,13 +5,13 @@ const express = require('express'),
       path = require('path'),
       PDFDocument = require('pdfkit');
 
-router.get('/api/download', (req, res) => {
+router.get('/download', (req, res) => {
     Paste.find()
         .then(allPastes => res.json(allPastes))
         .catch(console.log);
 });
 
-router.post('/api/upload', (req, res) => {
+router.post('/upload', (req, res) => {
     // Create a new .txt file containing the data
     const txtFilePath = path.resolve(__dirname + '/../files/', req.body.url + '.txt');
     fs.writeFile(txtFilePath ,req.body.pasteData, (err) => console.log(err));
@@ -35,7 +35,7 @@ router.post('/api/upload', (req, res) => {
         .catch(console.log);
 });
 
-router.get('/api/download/:url', (req, res) => {
+router.get('/download/:url', (req, res) => {
     const fileName = req.params.url + '.txt';
     // Get file path
     const file = path.resolve(__dirname + '/../files/', fileName);
@@ -52,7 +52,7 @@ router.get('/api/download/:url', (req, res) => {
     });
 });
 
-router.get('/api/downloadpdf/:url', (req, res) => {
+router.get('/downloadpdf/:url', (req, res) => {
     const fileName = req.params.url + '.pdf';
     // Get file path
     const file = path.resolve(__dirname + '/../files/', fileName);
@@ -68,5 +68,15 @@ router.get('/api/downloadpdf/:url', (req, res) => {
         }
     });
 });
+
+router.get('/view/:url', (req, res) => {
+    const fileName = req.params.url + '.txt';
+    // Get file path
+    const filePath = path.resolve(__dirname + '/../files/', fileName);
+    let pasteData =  fs.readFileSync(filePath, "utf8");
+    console.log(pasteData);
+    console.log("aaaa");
+    res.send(pasteData);
+})
 
 module.exports = router;

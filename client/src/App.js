@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import PasteList from './components/list/PasteList';
 import UploadForm from './components/forms/upload';
+import ViewPaste from './components/view/ViewPaste'
 
 class App extends Component {
 
@@ -13,6 +14,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' component={PasteList} />
           <Route path='/upload' component={UploadForm} />
+          <Route path='/view/:id' component={ViewPaste} />
         </Switch>
         <span style={{position:'absolute', bottom:0}}>
           Made with

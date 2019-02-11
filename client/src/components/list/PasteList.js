@@ -17,6 +17,7 @@ class PasteList extends Component {
     render(){
         let backgroundColor = grey[900];
         let headingStyle = {width:'8%', padding: 'auto', textAlign: 'center'};
+        console.log(this.props);
         return(
             <div style={{margin: '0% 5%'}}>
                 <List>
@@ -33,7 +34,8 @@ class PasteList extends Component {
                                 return(
                                     <IndivisualItem
                                       paste={paste}
-                                      key={index} 
+                                      key={index}
+                                      history={this.props.history}
                                     />
                                 )
                             })

@@ -50,7 +50,7 @@ class IndivisualItem extends Component {
     }
 
     redirect = () => {
-
+        this.props.history.push(`/view/${this.props.paste.url}`);
     }
 
     handleMouseEnter = () => {
