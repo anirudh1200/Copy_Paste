@@ -25,7 +25,6 @@ class PasteList extends Component {
                         <ListItemText />
                         <p style={headingStyle}>.txt</p>
                         <p style={headingStyle}>.pdf</p>
-                        <p style={headingStyle}>.View</p>
                     </ListItem>
                     <Consumer>
                         {({pasteList}) => {

@@ -6,7 +6,6 @@ import Avatar from '@material-ui/core/Avatar';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import grey from '@material-ui/core/colors/grey';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import ZoomOutMap from '@material-ui/icons/ZoomOutMap';
 
 class IndivisualItem extends Component {
 
@@ -49,10 +48,6 @@ class IndivisualItem extends Component {
 
     }
 
-    redirect = () => {
-        this.props.history.push(`/view/${this.props.paste.url}`);
-    }
-
     handleMouseEnter = () => {
         this.setState({isHovered: true});
     }
@@ -89,10 +84,6 @@ class IndivisualItem extends Component {
             <ArrowDownward
               style={iconStyle}
               onClick={() => this.downloadFile('.pdf')}
-            />
-            <ZoomOutMap
-              style={iconStyle}
-              onClick={() => this.redirect()}
             />
             </ListItem>
         )

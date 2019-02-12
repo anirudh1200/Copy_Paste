@@ -59,7 +59,7 @@ router.get('/downloadpdf/:url', (req, res) => {
     fs.exists(file,function(exists){
         if(exists){
             res.setHeader('Content-disposition', 'attachment; filename=' + fileName);
-            res.setHeader('Content-Type', 'application/document/pdf');
+            res.setHeader('Content-Type', 'application/pdf');
             let rstream = fs.createReadStream(file);
             rstream.pipe(res);
         } else {
