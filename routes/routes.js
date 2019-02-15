@@ -35,7 +35,7 @@ router.post('/upload', (req, res) => {
         .catch(console.log);
 });
 
-router.get('/download/:url', (req, res) => {
+router.get('/:url', (req, res) => {
     const fileName = req.params.url + '.txt';
     // Get file path
     const file = path.resolve(__dirname + '/../files/', fileName);
@@ -52,7 +52,7 @@ router.get('/download/:url', (req, res) => {
     });
 });
 
-router.get('/downloadpdf/:url', (req, res) => {
+router.get('/pdf/:url', (req, res) => {
     const fileName = req.params.url + '.pdf';
     // Get file path
     const file = path.resolve(__dirname + '/../files/', fileName);
@@ -69,14 +69,36 @@ router.get('/downloadpdf/:url', (req, res) => {
     });
 });
 
-router.get('/view/:url', (req, res) => {
-    const fileName = req.params.url + '.txt';
-    // Get file path
-    const filePath = path.resolve(__dirname + '/../files/', fileName);
-    let pasteData =  fs.readFileSync(filePath, "utf8");
-    console.log(pasteData);
-    console.log("aaaa");
-    res.send(pasteData);
-})
+router.get('/delete/:url', (req,res) => {
+    const extension = ['.txt', '.pdf'];
+    const url = req.params.url;
+    let error = 0;
+    let notfound = 0;
+    for(let i=0; i<2; i++){
+        let fileName = url + extension[i];
+        let file = path.resolve(__dirname + '/../files/', fileName);
+        fs.exists(file, (exists) => {
+            if(exists) {
+                fs.unlink(file,(err) => {
+                    if(err){
+                        error = err;
+                    }
+                });
+            } else {
+                notfound = 1;
+            }
+        });
+    }
+    if(error){
+        res.status(200).json({success: false, reason: error});
+    } else if(notfound){
+        res.status(200).json({success: false, reason: 'file not found'});
+    } else {
+        Paste.findOne({url})
+            .then(foundPaste => foundPaste.remove().catch(console.log))
+            .catch(err => console.log);
+        res.status(200).json({success: true});
+    }
+});
 
 module.exports = router;

@@ -6,6 +6,7 @@ import Avatar from '@material-ui/core/Avatar';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import grey from '@material-ui/core/colors/grey';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class IndivisualItem extends Component {
 
@@ -15,11 +16,11 @@ class IndivisualItem extends Component {
     
     downloadFile = (type) => {
         // An option
-        // window.location = `http://localhost:5000/api/download/${url}`;
+        // window.location = `http://localhost:5000/${url}`;
         // Second approach
         let url = this.props.paste.url;
         if(type === '.txt'){
-            fetch(`http://localhost:5000/api/download/${url}`)
+            fetch(`http://localhost:5000/${url}`)
             .then(res => res.blob())
             .then(blob => {
                 let Url = window.URL.createObjectURL(blob);
@@ -32,7 +33,7 @@ class IndivisualItem extends Component {
             })
             .catch(console.log);
         } else {
-            fetch(`http://localhost:5000/api/downloadpdf/${url}`)
+            fetch(`http://localhost:5000/pdf/${url}`)
             .then(res => res.blob())
             .then(blob => {
                 let Url = window.URL.createObjectURL(blob);
@@ -56,6 +57,21 @@ class IndivisualItem extends Component {
         this.setState({isHovered: false});
     }
 
+    handleDelete = () => {
+        let url = this.props.paste.url;
+        fetch(`http://localhost:5000/delete/${url}`)
+            .then(res => res.json())
+            .then(res => {
+                if(res.success){
+                    console.log("Successful");
+                    this.props.updatePasteList({url}, 'delete');
+                } else {
+                    console.log("Unsuccessful");
+                }
+            })
+            .catch(console.log);
+    }
+
     render(){
         const {paste} = this.props;
         let listItemStyle;
@@ -72,19 +88,23 @@ class IndivisualItem extends Component {
                         <AssignmentIcon />
                     </Avatar>
                 </ListItemAvatar>
-            <ListItemText
-              style={{letterSpacing: '0.05em'}}
-              primary={paste.url}
-              secondary={paste.date}
-            />
-            <ArrowDownward
-              style={iconStyle}
-              onClick={() => this.downloadFile('.txt')}
-            />
-            <ArrowDownward
-              style={iconStyle}
-              onClick={() => this.downloadFile('.pdf')}
-            />
+                <ListItemText
+                  style={{letterSpacing: '0.05em'}}
+                  primary={paste.url}
+                  secondary={paste.date}
+                />
+                <ArrowDownward
+                  style={iconStyle}
+                  onClick={() => this.downloadFile('.txt')}
+                />
+                <ArrowDownward
+                  style={iconStyle}
+                  onClick={() => this.downloadFile('.pdf')}
+                />
+                <DeleteIcon
+                  style={iconStyle}
+                  onClick={this.handleDelete}
+                />
             </ListItem>
         )
     }

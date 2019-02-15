@@ -23,7 +23,7 @@ class UploadForm extends Component{
     handleSubmit = () => {
         if(this.validateForm()){
             let data = {...this.state};
-            fetch("/api/upload",{
+            fetch("/upload",{
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json;charset=UTF-8"
@@ -101,7 +101,7 @@ class UploadForm extends Component{
                                           let {url, date} = this.state;
                                           console.log(url, date);
                                           this.handleSubmit();
-                                          updatePasteList({url, date});
+                                          updatePasteList({url, date}, 'add');
                                       }}
                                     >
                                       <NavigationIcon style={{color: grey[50]}} />

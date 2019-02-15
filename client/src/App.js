@@ -11,7 +11,7 @@ class App extends Component {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route exact path='/' component={PasteList} />
+          <Route exact path='/panel' component={PasteList} />
           <Route path='/upload' component={UploadForm} />
         </Switch>
         <span style={{position:'absolute', bottom:0}}>

@@ -8,13 +8,26 @@ export class Provider extends Component{
     }
 
     componentDidMount(){
-        fetch('http://localhost:5000/api/download')
+        fetch('http://localhost:5000/download')
             .then(res => res.json())
-            .then(res => this.setState({pasteList: res}));
+            .then(res => this.setState({
+                ...this.state,
+                pasteList: res
+            }));
     }
 
-    updatePasteList = (newPaste) => {
-        this.setState({pasteList: [...this.state.pasteList, newPaste]});
+    updatePasteList = (recievedPaste, type) => {
+        if(type === 'add')
+            this.setState({pasteList: [...this.state.pasteList, recievedPaste]});
+        else{
+            let newPasteList = this.state.pasteList.filter(paste => {
+                return paste.url !== recievedPaste.url;
+            })
+            this.setState({
+                ...this.state,
+                pasteList: newPasteList
+            });
+        }
     }
 
     render(){

@@ -25,9 +25,10 @@ class PasteList extends Component {
                         <ListItemText />
                         <p style={headingStyle}>.txt</p>
                         <p style={headingStyle}>.pdf</p>
+                        <p style={headingStyle}>Delete</p>
                     </ListItem>
                     <Consumer>
-                        {({pasteList}) => {
+                        {({pasteList, updatePasteList}) => {
                             console.log(pasteList);
                             return pasteList.map((paste, index) => {
                                 return(
@@ -35,6 +36,7 @@ class PasteList extends Component {
                                       paste={paste}
                                       key={index}
                                       history={this.props.history}
+                                      updatePasteList={updatePasteList}
                                     />
                                 )
                             })

@@ -41,7 +41,7 @@ app.use(function(req, res, next) {
 // ROUTES
 //=======================
 
-app.use("/api", Routes);
+app.use("/", Routes);
 
 app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname,"client","public","index.html"));
