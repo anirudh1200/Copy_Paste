@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import PasteList from './components/list/PasteList';
 import UploadForm from './components/forms/upload';
+import Home from './components/layout/Home';
 
 class App extends Component {
 
@@ -12,7 +13,8 @@ class App extends Component {
         <Navbar />
         <Switch>
           <Route exact path='/panel' component={PasteList} />
-          <Route path='/upload' component={UploadForm} />
+          <Route exact path='/uploadform' component={UploadForm} />
+          <Route exact path='/' component={Home} />
         </Switch>
         <span style={{position:'absolute', bottom:0}}>
           Made with

@@ -41,6 +41,13 @@ class UploadForm extends Component{
     }
 
     validateForm = () => {
+        const reservedWords = ['download', 'panel', 'upload', 'pdf', 'delete', 'uploadform'];
+        for(let i=0; i<reservedWords.length; i++){
+            if(this.state.url === reservedWords[i]){
+                this.setState({status: '* Url is a reserved word. Please change it'});
+                return false;
+            }
+        }
         if(!this.state.pasteData){
             this.setState({status: '* Your Paste Connot Be Empty'})
             return false;

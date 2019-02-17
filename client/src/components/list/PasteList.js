@@ -11,7 +11,7 @@ import grey from '@material-ui/core/colors/grey';
 class PasteList extends Component {
 
     redirectToUpload = () => {
-        this.props.history.push('/upload');
+        this.props.history.push('/uploadform');
     }
 
     render(){
