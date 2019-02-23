@@ -26,7 +26,7 @@ function SimpleAppBar(props) {
           <Typography variant="h6" color="inherit" style={{letterSpacing: '0.5em', fontSize: '1.5em'}}>
             COPYPASTE
           </Typography>
-          <Link to='/upload' style={{margin:0, padding:0}}>
+          <Link to='/uploadForm' style={{margin:0, padding:0}}>
             <AddIcon
               fontSize="large"
               style={{position: 'absolute', right: '5%', top: '25%' ,color: 'white', height: '50%'}}
