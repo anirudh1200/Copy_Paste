@@ -9,55 +9,55 @@ import grey from '@material-ui/core/colors/grey';
 
 class PasteList extends Component {
 
-    state = {
-        pasteList: []
-    }
+	state = {
+		pasteList: []
+	}
 
-    componentDidMount = () => {
-        fetch('http://localhost:5000/download')
-            .then(res => res.json())
-            .then(res => this.setState({
-                pasteList: res
-            }));
-    }
+	componentDidMount = () => {
+		fetch('http://localhost:5000/download')
+			.then(res => res.json())
+			.then(res => this.setState({
+				pasteList: res
+			}));
+	}
 
-    redirectToUpload = () => {
-        this.props.history.push('/uploadform');
-    }
+	redirectToUpload = () => {
+		this.props.history.push('/uploadform');
+	}
 
-    render(){
-        let backgroundColor = grey[900];
-        let headingStyle = {width:'8%', padding: 'auto', textAlign: 'center'};
-        let list = this.state.pasteList.map((paste, i) => {
-            return(
-                <IndivisualItem
-                  paste={paste}
-                  key={i}
-                  history={this.props.history}
-                />
-            )
-        });
-        return(
-            <div style={{margin: '0% 5%'}}>
-                <List>
-                    <ListItem>
-                        <ListItemText />
-                        <p style={headingStyle}>.txt</p>
-                        <p style={headingStyle}>.pdf</p>
-                        <p style={headingStyle}>Delete</p>
-                    </ListItem>
-                    {list}
-                </List>
-                <Fab
-                  aria-label="Add"
-                  style={{position: 'fixed', bottom: '10%', right: '5%', backgroundColor, color: 'white'}}
-                  onClick={this.redirectToUpload}
-                >
-                  <AddIcon fontSize="large" />
-                </Fab>
-            </div>
-        )
-    }
+	render() {
+		let backgroundColor = grey[900];
+		let headingStyle = { width: '8%', padding: 'auto', textAlign: 'center' };
+		let list = this.state.pasteList.map((paste, i) => {
+			return (
+				<IndivisualItem
+					paste={paste}
+					key={i}
+					history={this.props.history}
+				/>
+			)
+		});
+		return (
+			<div style={{ margin: '0% 5%' }}>
+				<List>
+					<ListItem>
+						<ListItemText />
+						<p style={headingStyle}>.txt</p>
+						<p style={headingStyle}>.pdf</p>
+						<p style={headingStyle}>Delete</p>
+					</ListItem>
+					{list}
+				</List>
+				<Fab
+					aria-label="Add"
+					style={{ position: 'fixed', bottom: '10%', right: '5%', backgroundColor, color: 'white' }}
+					onClick={this.redirectToUpload}
+				>
+					<AddIcon fontSize="large" />
+				</Fab>
+			</div>
+		)
+	}
 }
 
 export default PasteList;

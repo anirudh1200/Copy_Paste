@@ -16,7 +16,7 @@ class App extends Component {
           <Route exact path='/uploadform' component={UploadForm} />
           <Route exact path='/' component={Home} />
         </Switch>
-        <span style={{position:'fixed', bottom:0}}>
+        <span style={{ position: 'fixed', bottom: 0 }}>
           Made with
           <span role="img" aria-label="heart">❤️</span>
           by anirudh1200
