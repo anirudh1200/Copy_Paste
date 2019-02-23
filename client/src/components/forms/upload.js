@@ -67,7 +67,7 @@ class UploadForm extends Component {
 				>
 					Upload Your Paste
                 </Typography>
-				<form autoComplete="off" style={{ width: '80%', margin: '0% 10%' }}>
+				<form autoComplete="off" style={{ width: '80%', margin: '0% 8%' }}>
 					<TextField
 						id="outlined-multiline-static"
 						required
@@ -85,6 +85,7 @@ class UploadForm extends Component {
 						id="standard-disabled"
 						value="URL: www.example.com/"
 						margin="normal"
+						style={{ maxWidth: '58%' }}
 					/>
 					<TextField
 						id="standard-name"
@@ -93,8 +94,9 @@ class UploadForm extends Component {
 						name="url"
 						onChange={this.handleChange}
 						margin="none"
+						style={{ maxWidth: '40%' }}
 					/>
-					<div style={{ marginTop: '2%', textAlign: 'center' }}>
+					<div style={{ marginTop: '2%', textAlign: 'center', marginBottom: '30px' }}>
 						<div style={{ color: 'red' }}>{this.state.status}</div>
 						<Fab
 							variant="extended"
@@ -107,7 +109,7 @@ class UploadForm extends Component {
 						>
 							<NavigationIcon style={{ color: grey[50] }} />
 							Upload
-                            </Fab>
+            </Fab>
 					</div>
 				</form>
 			</Fragment>

@@ -33,21 +33,21 @@ function SimpleAppBar(props) {
               COPYPASTE
             </Typography>
           </Link>
-          <Link to='/uploadform' style={{ margin: 0, padding: 0 }}>
-            <Fab aria-label="Add" style={{ position: 'absolute', right: '4%', top: '5%', backgroundColor }}>
-              <AddIcon style={{ color: 'white' }} />
-            </Fab>
-          </Link>
-          <Fab
-            aria-label="Add"
-            style={{ position: 'absolute', fontSize: '1.2em', right: '8%', top: '5%', backgroundColor, color: 'white' }}
-            onClick={() => setCount(<Info handleClose={handleClose} />)}
-          >
-            ℹ
-          </Fab>
           <Link to='/panel' style={{ margin: 0, padding: 0 }}>
             <Fab aria-label="Add" style={{ position: 'absolute', right: '12%', top: '5%', backgroundColor }}>
               <ListIcon style={{ color: 'white' }} />
+            </Fab>
+            <Fab
+              aria-label="Add"
+              style={{ position: 'absolute', fontSize: '1.2em', right: '8%', top: '5%', backgroundColor, color: 'white' }}
+              onClick={() => setCount(<Info handleClose={handleClose} />)}
+            >
+              ℹ
+            </Fab>
+          </Link>
+          <Link to='/uploadform' style={{ margin: 0, padding: 0 }}>
+            <Fab aria-label="Add" style={{ position: 'absolute', right: '4%', top: '5%', backgroundColor }}>
+              <AddIcon style={{ color: 'white' }} />
             </Fab>
           </Link>
         </Toolbar>

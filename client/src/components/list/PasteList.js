@@ -24,6 +24,12 @@ class PasteList extends Component {
 	redirectToUpload = () => {
 		this.props.history.push('/uploadform');
 	}
+	handleDelete = (url) => {
+		let newPasteList = this.state.pasteList.filter(paste => {
+			return paste.url !== url
+		});
+		this.setState({ pasteList: newPasteList });
+	}
 
 	render() {
 		let backgroundColor = grey[900];
@@ -34,6 +40,7 @@ class PasteList extends Component {
 					paste={paste}
 					key={i}
 					history={this.props.history}
+					handleDelete={this.handleDelete}
 				/>
 			)
 		});

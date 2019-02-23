@@ -28,35 +28,36 @@ const Home = props => {
 					variant="h2"
 					style={{
 						fontFamily: "Major Mono Display",
-						fontSize: "6vw",
+						fontSize: "4.5em",
 						marginBottom: 15,
 						paddingTop: "30vh",
 						fontWeight: 'bold'
 					}}
 				>
 					codebin
-                </Typography>
+        </Typography>
 				<Typography
 					align="center"
 					variant="h6"
 					style={{ fontFamily: "Major Mono Display" }}
 				>
 					enjoy the ease of sharing
-                </Typography>
+        </Typography>
 				<Fab
 					variant="extended"
 					aria-label="Delete"
 					onClick={redirectToUpload}
 					size='large'
 					style={{
-						position: 'relative',
-						left: '45%',
 						backgroundColor,
 						color: 'white',
 						fontSize: '1.5em',
-						height: '75px',
-						width: '175px',
-						marginTop: '2%'
+						height: '8%',
+						width: '13%',
+						minHeight: '50px',
+						minWidth: '120px',
+						marginTop: '2%',
+						marginLeft: '44%',
 					}}
 				>
 					<NavigationIcon size='large' />

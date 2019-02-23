@@ -64,7 +64,7 @@ class IndivisualItem extends Component {
 			.then(res => {
 				if (res.success) {
 					console.log("Successful");
-					this.props.updatePasteList({ url }, 'delete');
+					this.props.handleDelete(url);
 				} else {
 					console.log("Unsuccessful");
 				}

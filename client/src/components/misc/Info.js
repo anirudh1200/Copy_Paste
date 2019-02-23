@@ -36,7 +36,7 @@ class Info extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
         >
-          <div style={{ top: '10%', left: '10%', height: '70%', width: '80%' }} className={classes.paper}>
+          <div style={{ top: '15%', left: '10%', height: '60%', width: '80%' }} className={classes.paper}>
             <Typography
               variant="h2"
               align="center"
