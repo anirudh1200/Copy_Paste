@@ -3,12 +3,23 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import IndivisualItem from './IndivisualItem';
-import { Consumer } from '../../context';
 import Fab from '@material-ui/core/Fab';
 import AddIcon from '@material-ui/icons/Add';
 import grey from '@material-ui/core/colors/grey';
 
 class PasteList extends Component {
+
+    state = {
+        pasteList: []
+    }
+
+    componentDidMount = () => {
+        fetch('http://localhost:5000/download')
+            .then(res => res.json())
+            .then(res => this.setState({
+                pasteList: res
+            }));
+    }
 
     redirectToUpload = () => {
         this.props.history.push('/uploadform');
@@ -17,7 +28,15 @@ class PasteList extends Component {
     render(){
         let backgroundColor = grey[900];
         let headingStyle = {width:'8%', padding: 'auto', textAlign: 'center'};
-        console.log(this.props);
+        let list = this.state.pasteList.map((paste, i) => {
+            return(
+                <IndivisualItem
+                  paste={paste}
+                  key={i}
+                  history={this.props.history}
+                />
+            )
+        });
         return(
             <div style={{margin: '0% 5%'}}>
                 <List>
@@ -27,21 +46,7 @@ class PasteList extends Component {
                         <p style={headingStyle}>.pdf</p>
                         <p style={headingStyle}>Delete</p>
                     </ListItem>
-                    <Consumer>
-                        {({pasteList, updatePasteList}) => {
-                            console.log(pasteList);
-                            return pasteList.map((paste, index) => {
-                                return(
-                                    <IndivisualItem
-                                      paste={paste}
-                                      key={index}
-                                      history={this.props.history}
-                                      updatePasteList={updatePasteList}
-                                    />
-                                )
-                            })
-                        }}
-                    </Consumer>
+                    {list}
                 </List>
                 <Fab
                   aria-label="Add"

@@ -5,7 +5,6 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 import Typography from '@material-ui/core/Typography';
 import grey from '@material-ui/core/colors/grey';
 import formatDate from '../../utils/date';
-import { Consumer } from '../../context';
 
 class UploadForm extends Component{
 
@@ -97,26 +96,18 @@ class UploadForm extends Component{
                     />
                     <div style={{marginTop: '2%', textAlign: 'center'}}>
                         <div style={{color: 'red'}}>{this.state.status}</div>
-                        <Consumer>
-                            {({updatePasteList}) => {
-                                return(
-                                    <Fab
-                                      variant="extended"
-                                      aria-label="Delete"
-                                      style={{color: grey[50],backgroundColor: grey[800]}}
-                                      onClick={() => {
-                                          let {url, date} = this.state;
-                                          console.log(url, date);
-                                          this.handleSubmit();
-                                          updatePasteList({url, date}, 'add');
-                                      }}
-                                    >
-                                      <NavigationIcon style={{color: grey[50]}} />
-                                      Upload
-                                    </Fab>
-                                )
-                            }}
-                        </Consumer>
+                            <Fab
+                              variant="extended"
+							  aria-label="Delete"
+							  onClick={this.handleSubmit}
+                              style={{
+								color: grey[50],
+								backgroundColor: grey[800]
+							  }}
+                            >
+                              <NavigationIcon style={{color: grey[50]}} />
+                              Upload
+                            </Fab>
                     </div>
                 </form>
             </Fragment>
