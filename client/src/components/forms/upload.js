@@ -83,7 +83,7 @@ class UploadForm extends Component {
 					<TextField
 						disabled
 						id="standard-disabled"
-						value="URL: www.example.com/"
+						value="URL: codebinn.herokuapp.com/"
 						margin="normal"
 						style={{ maxWidth: '58%' }}
 					/>
