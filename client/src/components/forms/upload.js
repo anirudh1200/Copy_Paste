@@ -66,7 +66,7 @@ class UploadForm extends Component {
 					style={{ width: '100%', margin: '1% 0%', textAlign: 'center', color: grey[800] }}
 				>
 					Upload Your Paste
-                </Typography>
+        </Typography>
 				<form autoComplete="off" style={{ width: '80%', margin: '0% 8%' }}>
 					<TextField
 						id="outlined-multiline-static"

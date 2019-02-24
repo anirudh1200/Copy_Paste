@@ -14,7 +14,7 @@ class PasteList extends Component {
 	}
 
 	componentDidMount = () => {
-		fetch('http://localhost:5000/download')
+		fetch('/download')
 			.then(res => res.json())
 			.then(res => this.setState({
 				pasteList: res

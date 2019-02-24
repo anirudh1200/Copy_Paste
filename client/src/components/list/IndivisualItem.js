@@ -16,11 +16,11 @@ class IndivisualItem extends Component {
 
 	downloadFile = (type) => {
 		// An option
-		// window.location = `http://localhost:5000/${url}`;
+		// window.location = `/${url}`;
 		// Second approach
 		let url = this.props.paste.url;
 		if (type === '.txt') {
-			fetch(`http://localhost:5000/${url}`)
+			fetch(`/${url}`)
 				.then(res => res.blob())
 				.then(blob => {
 					let Url = window.URL.createObjectURL(blob);
@@ -33,7 +33,7 @@ class IndivisualItem extends Component {
 				})
 				.catch(console.log);
 		} else {
-			fetch(`http://localhost:5000/pdf/${url}`)
+			fetch(`/pdf/${url}`)
 				.then(res => res.blob())
 				.then(blob => {
 					let Url = window.URL.createObjectURL(blob);
@@ -59,7 +59,7 @@ class IndivisualItem extends Component {
 
 	handleDelete = () => {
 		let url = this.props.paste.url;
-		fetch(`http://localhost:5000/delete/${url}`)
+		fetch(`/delete/${url}`)
 			.then(res => res.json())
 			.then(res => {
 				if (res.success) {

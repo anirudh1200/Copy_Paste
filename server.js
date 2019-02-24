@@ -1,9 +1,10 @@
-const express = require('express'),
-    app = express(),
-    bodyParser = require('body-parser'),
-    mongoose = require('mongoose'),
-    path = require('path'),
-    Routes = require('./routes/routes.js');
+const express       = require('express'),
+      app           = express(),
+      bodyParser    = require('body-parser'),
+      mongoose      = require('mongoose'),
+      path          = require('path'),
+    //   logger        = require('morgan'),
+      Routes        = require('./routes/routes.js');
 
 //=======================
 // MIDDLEWARE
@@ -12,17 +13,18 @@ const express = require('express'),
 app.use(express.static(path.resolve(__dirname, "client")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(logger('dev'));
 
 //=======================
 // DATABASE CONFIG
 //=======================
 
 // for development
-const db = 'mongodb://localhost/copyPaste';
+// const db = 'mongodb://localhost/copyPaste';
 // for production
 // const db = require('./config/keys').mongoURI;
 // for heroku using congfig vars
-// const db = process.env.COPY_DATABASE_URL;
+const db = process.env.COPY_DATABASE_URL;
 mongoose.connect(db, { useNewUrlParser: true })
     .then(() => console.log("Database connected"))
     .catch(console.log);

@@ -42,8 +42,7 @@ router.get('/:url', (req, res) => {
             let rstream = fs.createReadStream(file);
             rstream.pipe(res);
         } else {
-            res.json({ success: false });
-            res.end();
+            res.redirect('/');
         }
     });
 });
@@ -58,8 +57,7 @@ router.get('/pdf/:size/:url', (req, res) => {
         if (exists) {
             handlePfdDownload(res, req.params.url, file, req.params.size);
         } else {
-            res.json({ success: false });
-            res.end();
+            res.redirect('/');
         }
     });
 });
@@ -74,8 +72,7 @@ router.get('/pdf/:url', (req, res) => {
         if (exists) {
             handlePfdDownload(res, req.params.url, file, 12);
         } else {
-            res.json({ success: false });
-            res.end();
+            res.redirect('/');
         }
     });
 });
@@ -92,8 +89,7 @@ const handlePfdDownload = (res, url, file, size) => {
             let rstream = fs.createReadStream(pdfFile);
             rstream.pipe(res);
         } else {
-            res.json({ success: false });
-            res.end();
+            res.redirect('/');
         }
     });
 }
