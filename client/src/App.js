@@ -4,6 +4,7 @@ import Navbar from './components/layout/Navbar';
 import PasteList from './components/list/PasteList';
 import UploadForm from './components/forms/upload';
 import Home from './components/layout/Home';
+import NotFound from './components/misc/NotFound'
 
 class App extends Component {
 
@@ -15,6 +16,9 @@ class App extends Component {
           <Route exact path='/panel' component={PasteList} />
           <Route exact path='/uploadform' component={UploadForm} />
           <Route exact path='/' component={Home} />
+          <Route exact path='/error' component={NotFound} />
+          <Route exact path='/d/*' />
+          <Route exact path='*' component={NotFound} />
         </Switch>
         <span style={{ position: 'fixed', bottom: 0 }}>
           Made with

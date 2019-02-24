@@ -66,7 +66,7 @@ class Info extends React.Component {
                 marginBottom: '3%'
               }}
             >
-              go to codebinn.herokuapp.com/(url) to download in txt format
+              go to codebinn.herokuapp.com/d/(url) to download in txt format
             </Typography>
             <Typography
               variant="h6"
@@ -76,7 +76,7 @@ class Info extends React.Component {
                 marginBottom: '3%'
               }}
             >
-              go to codebinn.herokuapp.com/pdf/(url) to download in pdf format
+              go to codebinn.herokuapp.com/d/pdf/(url) to download in pdf format
             </Typography>
             <Typography
               variant="h6"
@@ -86,7 +86,7 @@ class Info extends React.Component {
                 marginBottom: '3%'
               }}
             >
-              go to codebinn.herokuapp.com/pdf/size/(url) to download in pdf format with specific font size
+              go to codebinn.herokuapp.com/d/pdf/size/(url) to download in pdf format with specific font size
             </Typography>
           </div>
         </Modal>

@@ -4,8 +4,7 @@
   "description": "A easy to use webapp to paste your stuff and retrive it from custom urls at your ease",
   "main": "server.js",
   "scripts": {
-    "it": "NODE_ENV=production nodemon server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install"
+    "it": "NODE_ENV=production nodemon server.js"
   },
   "author": "",
   "license": "ISC",

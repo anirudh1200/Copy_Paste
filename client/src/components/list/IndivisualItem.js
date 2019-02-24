@@ -20,7 +20,7 @@ class IndivisualItem extends Component {
 		// Second approach
 		let url = this.props.paste.url;
 		if (type === '.txt') {
-			fetch(`/${url}`)
+			fetch(`/d/${url}`)
 				.then(res => res.blob())
 				.then(blob => {
 					let Url = window.URL.createObjectURL(blob);
@@ -33,7 +33,7 @@ class IndivisualItem extends Component {
 				})
 				.catch(console.log);
 		} else {
-			fetch(`/pdf/${url}`)
+			fetch(`/d/pdf/${url}`)
 				.then(res => res.blob())
 				.then(blob => {
 					let Url = window.URL.createObjectURL(blob);
@@ -59,7 +59,7 @@ class IndivisualItem extends Component {
 
 	handleDelete = () => {
 		let url = this.props.paste.url;
-		fetch(`/delete/${url}`)
+		fetch(`/d/delete/${url}`)
 			.then(res => res.json())
 			.then(res => {
 				if (res.success) {

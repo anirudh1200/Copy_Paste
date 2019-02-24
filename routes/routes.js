@@ -5,7 +5,7 @@ const express = require('express'),
     path = require('path'),
     PDFDocument = require('pdfkit');
 
-// @route   GET /download
+// @route   GET /d/download
 // @desc    get a list of all available files
 router.get('/download', (req, res) => {
     Paste.find()
@@ -13,7 +13,7 @@ router.get('/download', (req, res) => {
         .catch(console.log);
 });
 
-// @route   GET /upload
+// @route   GET /d/upload
 // @desc    stores the data in a newly created txt file
 router.post('/upload', (req, res) => {
     // Create a new .txt file containing the data
@@ -29,7 +29,7 @@ router.post('/upload', (req, res) => {
         .catch(console.log);
 });
 
-// @route   GET /:url
+// @route   GET /d/:url
 // @desc    download file of txt format
 router.get('/:url', (req, res) => {
     const fileName = req.params.url + '.txt';
@@ -42,12 +42,12 @@ router.get('/:url', (req, res) => {
             let rstream = fs.createReadStream(file);
             rstream.pipe(res);
         } else {
-            res.redirect('/');
+            res.redirect('/error');
         }
     });
 });
 
-// @route   GET /pdf/:size/:url
+// @route   GET /d/pdf/:size/:url
 // @desc    generate and download a pdf to specific font size
 router.get('/pdf/:size/:url', (req, res) => {
     const fileName = req.params.url + '.txt';
@@ -57,12 +57,12 @@ router.get('/pdf/:size/:url', (req, res) => {
         if (exists) {
             handlePfdDownload(res, req.params.url, file, req.params.size);
         } else {
-            res.redirect('/');
+            res.redirect('/error');
         }
     });
 });
 
-// @route   GET /pdf/:url
+// @route   GET /d/pdf/:url
 // @desc    generate and download a pdf
 router.get('/pdf/:url', (req, res) => {
     const fileName = req.params.url + '.txt';
@@ -72,7 +72,7 @@ router.get('/pdf/:url', (req, res) => {
         if (exists) {
             handlePfdDownload(res, req.params.url, file, 12);
         } else {
-            res.redirect('/');
+            res.redirect('/error');
         }
     });
 });
@@ -89,7 +89,7 @@ const handlePfdDownload = (res, url, file, size) => {
             let rstream = fs.createReadStream(pdfFile);
             rstream.pipe(res);
         } else {
-            res.redirect('/');
+            res.redirect('/error');
         }
     });
 }
@@ -107,7 +107,7 @@ const generatePdf = (file, pdfFile, size) => {
     doc.end();
 }
 
-// @route   GET /delete/:url
+// @route   GET /d/delete/:url
 // @desc    delete the particyular file txt and pdf and then from database
 router.get('/delete/:url', (req, res) => {
     const extension = ['.txt', '.pdf'];

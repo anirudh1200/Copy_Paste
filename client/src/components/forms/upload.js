@@ -22,7 +22,7 @@ class UploadForm extends Component {
 	handleSubmit = () => {
 		if (this.validateForm()) {
 			let data = { ...this.state };
-			fetch("/upload", {
+			fetch("/d/upload", {
 				method: 'POST',
 				headers: {
 					"Content-Type": "application/json;charset=UTF-8"
@@ -83,7 +83,7 @@ class UploadForm extends Component {
 					<TextField
 						disabled
 						id="standard-disabled"
-						value="URL: codebinn.herokuapp.com/"
+						value="codebinn.herokuapp.com/d/"
 						margin="normal"
 						style={{ maxWidth: '58%' }}
 					/>
