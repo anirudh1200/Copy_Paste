@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import PasteList from './components/list/PasteList';
-import UploadForm from './components/forms/upload';
+import UploadForm from './components/forms/Upload';
 import Home from './components/layout/Home';
 import NotFound from './components/misc/NotFound'
 

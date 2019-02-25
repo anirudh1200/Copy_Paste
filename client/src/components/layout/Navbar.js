@@ -30,7 +30,7 @@ function SimpleAppBar(props) {
         <Toolbar className={classes.root}>
           <Link to='/' style={{ textDecoration: 'none' }}>
             <Typography variant="h6" style={{ color: 'white', letterSpacing: '0.5em', fontSize: '1.5em' }}>
-              COPYPASTE
+              CODEBIN
             </Typography>
           </Link>
           <Link to='/panel' style={{ margin: 0, padding: 0 }}>
