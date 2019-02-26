@@ -7,6 +7,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import grey from '@material-ui/core/colors/grey';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import DeleteIcon from '@material-ui/icons/Delete';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 class IndivisualItem extends Component {
 
@@ -46,7 +47,11 @@ class IndivisualItem extends Component {
 				})
 				.catch(console.log);
 		}
+	}
 
+	redirectToView = () => {
+		let url = this.props.paste.url;
+		this.props.history.push(`/view/${url}`);
 	}
 
 	handleMouseEnter = () => {
@@ -92,6 +97,10 @@ class IndivisualItem extends Component {
 					style={{ letterSpacing: '0.05em' }}
 					primary={paste.url}
 					secondary={paste.date}
+				/>
+				<VisibilityIcon
+					style={iconStyle}
+					onClick={this.redirectToView}
 				/>
 				<ArrowDownward
 					style={iconStyle}

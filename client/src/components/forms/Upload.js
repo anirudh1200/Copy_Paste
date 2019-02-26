@@ -10,19 +10,27 @@ import AceEditor from '../editor/AceEditor';
 class UploadForm extends Component {
 
 	state = {
-		pasteData: '',
+		pasteData: 'abc',
 		url: '',
 		date: formatDate(new Date()),
-		status: ''
+		status: '',
+		editor: ''
 	}
 
 	handleChange = e => {
-		this.setState({ [e.target.name]: e.target.value.replace(/\t/g, "    ") });
+		this.setState({ [e.target.name]: e.target.value });
 	}
 
 	handleSubmit = () => {
+		let pasteData = this.state.editor.getValue().replace(/\t/g, "    ");
+		this.setState({ pasteData }, this.upload);
+	}
+
+	upload = () => {
+		console.log(this.state.pasteData);
 		if (this.validateForm()) {
-			let data = { ...this.state };
+			let {editor, status, ...data} = this.state;
+			console.log(data);
 			fetch("/d/upload", {
 				method: 'POST',
 				headers: {
@@ -41,10 +49,18 @@ class UploadForm extends Component {
 	}
 
 	validateForm = () => {
+		let url = this.state.url;
 		const reservedWords = ['download', 'panel', 'upload', 'pdf', 'delete', 'uploadform'];
 		for (let i = 0; i < reservedWords.length; i++) {
-			if (this.state.url === reservedWords[i]) {
+			if (url === reservedWords[i]) {
 				this.setState({ status: '* Url is a reserved word. Please change it' });
+				return false;
+			}
+		}
+		let splChars = "* |,\":<>[]{}`\\';()@&$#%";
+		for (let i = 0; i < url.length; i++) {
+			if (splChars.indexOf(url[i]) !== -1) {
+				this.setState({ status: '* URL cannot contain special characters or spaces' });
 				return false;
 			}
 		}
@@ -52,11 +68,15 @@ class UploadForm extends Component {
 			this.setState({ status: '* Your Paste Connot Be Empty' })
 			return false;
 		}
-		if (!this.state.url) {
+		if (!url) {
 			this.setState({ status: '* Please Enter URL' })
 			return false;
 		}
 		return true;
+	}
+
+	getEditor = (editor) => {
+		this.setState({ editor });
 	}
 
 	render() {
@@ -69,7 +89,9 @@ class UploadForm extends Component {
 					Upload Your Paste
         </Typography>
 				<form autoComplete="off" style={{ width: '80%', margin: '0% 8%' }}>
-					<AceEditor />
+					<AceEditor
+						getEditor={this.getEditor}
+					/>
 					<TextField
 						disabled
 						id="standard-disabled"

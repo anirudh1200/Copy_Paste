@@ -49,6 +49,7 @@ class PasteList extends Component {
 				<List>
 					<ListItem>
 						<ListItemText />
+						<p style={headingStyle}>View</p>
 						<p style={headingStyle}>.txt</p>
 						<p style={headingStyle}>.pdf</p>
 						<p style={headingStyle}>Delete</p>
