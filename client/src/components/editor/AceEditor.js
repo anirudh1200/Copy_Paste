@@ -7,8 +7,8 @@ class AceEditor extends Component {
     let ace = window.ace;
     const node = findDOMNode(this.refs.root);
     const editor = ace.edit(node);
-    editor.setTheme("ace/theme/pastel_on_dark");
-    editor.getSession().setMode("ace/mode/javascript");
+    editor.setTheme("ace/theme/dark");
+    editor.getSession().setMode("ace/mode/c_cpp");
     editor.setShowPrintMargin(false);
     editor.setOptions({minLines: 30});
     editor.setOptions({maxLines: 30});
