@@ -28,7 +28,7 @@ const Home = props => {
 					variant="h2"
 					style={{
 						fontFamily: "Major Mono Display",
-						fontSize: "4.5em",
+						fontSize: "10vh",
 						marginBottom: 15,
 						paddingTop: "30vh",
 						fontWeight: 'bold'
@@ -52,16 +52,16 @@ const Home = props => {
 						backgroundColor,
 						color: 'white',
 						fontSize: '1.5em',
-						height: '8%',
-						width: '13%',
 						minHeight: '50px',
 						minWidth: '120px',
 						marginTop: '2%',
-						marginLeft: '44%',
+						display: "block",
+						marginLeft: "auto",
+						marginRight: "auto"
 					}}
 				>
 					<NavigationIcon size='large' />
-					{"Upload"}
+					Upload
 				</Fab>
 			</div>
 		</Fragment>
