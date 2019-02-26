@@ -20,6 +20,10 @@ class UploadForm extends Component {
 		this.setState({ [e.target.name]: e.target.value.replace(/\t/g, "    ") });
 	}
 
+	handleAceChange = (value) => {
+		this.setState({pasteData: value.replace(/\t/g, "    ")});
+	}
+
 	handleSubmit = () => {
 		if (this.validateForm()) {
 			let data = { ...this.state };
@@ -49,7 +53,7 @@ class UploadForm extends Component {
 			}
 		}
 		if (!this.state.pasteData) {
-			this.setState({ status: '* Your Paste Connot Be Empty' })
+			this.setState({ status: '* Your Paste cannot be empty!' })
 			return false;
 		}
 		if (!this.state.url) {
@@ -69,7 +73,7 @@ class UploadForm extends Component {
 					Upload Your Paste
         </Typography>
 				<form autoComplete="off" style={{ width: '80%', margin: '0% 8%' }}>
-					<AceEditor />
+					<AceEditor name="pasteData" onChange={this.handleAceChange}/>
 					<TextField
 						disabled
 						id="standard-disabled"
