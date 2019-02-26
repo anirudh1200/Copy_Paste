@@ -108,7 +108,7 @@ const generatePdf = (file, pdfFile, size) => {
 }
 
 // @route   GET /d/delete/:url
-// @desc    delete the particyular file txt and pdf and then from database
+// @desc    delete the particular file txt and pdf and then from database
 router.get('/delete/:url', (req, res) => {
     const extension = ['.txt', '.pdf'];
     const url = req.params.url;
@@ -139,6 +139,21 @@ router.get('/delete/:url', (req, res) => {
             .catch(err => console.log);
         res.status(200).json({ success: true });
     }
+});
+
+// @route   GET /d/view/:url
+// @desc    send code contents from txt file
+router.get('/view/:url', (req, res) => {
+    const fileName = req.params.url + '.txt';
+    const file = path.resolve(__dirname + '/../files/', fileName);
+    fs.exists(file, (exists) => {
+        if (exists) {
+            let pasteData = fs.readFileSync(file, "utf8");
+            res.json({pasteData});
+        } else {
+            res.redirect('/error');
+        }
+    });
 });
 
 module.exports = router;

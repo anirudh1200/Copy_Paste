@@ -29,15 +29,15 @@ mongoose.connect(db, { useNewUrlParser: true })
     .then(() => console.log("Database connected"))
     .catch(console.log);
 
-// //=======================
-// // ALLOW-CORS
-// //=======================
-// app.use(function (req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-//     next();
-// });
+//=======================
+// ALLOW-CORS
+//=======================
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+    next();
+});
 
 //=======================
 // ROUTES

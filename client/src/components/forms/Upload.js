@@ -13,8 +13,7 @@ class UploadForm extends Component {
 		pasteData: '',
 		url: '',
 		date: formatDate(new Date()),
-		status: '',
-		editor: ''
+		status: ''
 	}
 
 	handleChange = e => {
@@ -28,7 +27,7 @@ class UploadForm extends Component {
 	handleSubmit = () => {
 		console.log(this.state.pasteData);
 		if (this.validateForm()) {
-			let { editor, status, ...data } = this.state;
+			let { status, ...data } = this.state;
 			console.log(data);
 			fetch("/d/upload", {
 				method: 'POST',
@@ -74,10 +73,6 @@ class UploadForm extends Component {
 		return true;
 	}
 
-	getEditor = (editor) => {
-		this.setState({ editor });
-	}
-
 	render() {
 		return (
 			<Fragment>
@@ -88,7 +83,11 @@ class UploadForm extends Component {
 					Upload Your Paste
         </Typography>
 				<form autoComplete="off" style={{ width: '80%', margin: '0% 8%' }}>
-					<AceEditor name="pasteData" onChange={this.handleAceChange} />
+					<AceEditor
+						initialValue={''}
+						name="pasteData"
+						onChange={this.handleAceChange}
+					/>
 					<TextField
 						disabled
 						id="standard-disabled"
