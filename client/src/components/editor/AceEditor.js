@@ -13,11 +13,13 @@ class AceEditor extends Component {
     editor.setOptions({ minLines: 30 });
     editor.setOptions({ maxLines: 30 });
     editor.setOption('fontSize', 20);
-    this.props.getEditor(editor);
-  }
+    editor.on("change", (delta) => {
+        this.props.onChange(editor.getValue());
+    });
+  } 
 
   render() {
-    const style = { fontSize: '14px !important', border: '1px solid lightgray' };
+    const style = {fontSize: '14px !important', border: '1px solid lightgray'};
     return (
       <div ref="root" style={style}>
         {this.props.code}

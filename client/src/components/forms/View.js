@@ -7,6 +7,19 @@ import grey from '@material-ui/core/colors/grey';
 import AceEditor from '../editor/AceEditor';
 
 class View extends Component {
+
+	state = {
+		pasteData: '',
+		url: '',
+		date: '',
+		status: '',
+		editor: ''
+	}
+
+	componentDidMount = () => {
+		this.setState({ url: this.props.location.pathname.slice(6) });
+	}
+
 	render() {
 		return (
 			<Fragment>
@@ -14,8 +27,8 @@ class View extends Component {
 					variant="h4"
 					style={{ width: '100%', margin: '1% 0%', textAlign: 'center', color: grey[800] }}
 				>
-					Upload Your Paste
-        </Typography>
+					{this.state.url}
+				</Typography>
 				<form autoComplete="off" style={{ width: '80%', margin: '0% 8%' }}>
 					<AceEditor />
 					<TextField
@@ -26,11 +39,9 @@ class View extends Component {
 						style={{ maxWidth: '58%' }}
 					/>
 					<TextField
+						disabled
 						id="standard-name"
-						label="Url"
-						value={this.state.name}
-						name="url"
-						onChange={this.handleChange}
+						label={this.state.url}
 						margin="none"
 						style={{ maxWidth: '40%' }}
 					/>

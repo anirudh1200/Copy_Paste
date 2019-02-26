@@ -10,7 +10,7 @@ import AceEditor from '../editor/AceEditor';
 class UploadForm extends Component {
 
 	state = {
-		pasteData: 'abc',
+		pasteData: '',
 		url: '',
 		date: formatDate(new Date()),
 		status: '',
@@ -21,15 +21,14 @@ class UploadForm extends Component {
 		this.setState({ [e.target.name]: e.target.value });
 	}
 
-	handleSubmit = () => {
-		let pasteData = this.state.editor.getValue().replace(/\t/g, "    ");
-		this.setState({ pasteData }, this.upload);
+	handleAceChange = (value) => {
+		this.setState({ pasteData: value.replace(/\t/g, "    ") });
 	}
 
-	upload = () => {
+	handleSubmit = () => {
 		console.log(this.state.pasteData);
 		if (this.validateForm()) {
-			let {editor, status, ...data} = this.state;
+			let { editor, status, ...data } = this.state;
 			console.log(data);
 			fetch("/d/upload", {
 				method: 'POST',
@@ -65,7 +64,7 @@ class UploadForm extends Component {
 			}
 		}
 		if (!this.state.pasteData) {
-			this.setState({ status: '* Your Paste Connot Be Empty' })
+			this.setState({ status: '* Your Paste cannot be empty!' })
 			return false;
 		}
 		if (!url) {
@@ -89,9 +88,7 @@ class UploadForm extends Component {
 					Upload Your Paste
         </Typography>
 				<form autoComplete="off" style={{ width: '80%', margin: '0% 8%' }}>
-					<AceEditor
-						getEditor={this.getEditor}
-					/>
+					<AceEditor name="pasteData" onChange={this.handleAceChange} />
 					<TextField
 						disabled
 						id="standard-disabled"
