@@ -15,12 +15,10 @@ class AceEditor extends Component {
     editor.setTheme("ace/theme/dark");
     editor.getSession().setMode("ace/mode/c_cpp");
     editor.setShowPrintMargin(false);
-    editor.setOptions({ minLines: 30 });
-    editor.setOptions({ maxLines: 30 });
+    editor.setOptions({ minLines: this.props.numberOfLines });
+    editor.setOptions({ maxLines: this.props.numberOfLines });
     editor.setOption('fontSize', 20);
-    editor.on("change", (delta) => {
-      this.props.onChange(editor.getValue());
-    });
+    this.props.getEditor(editor);
     editor.setValue(this.state.editor, -1);
     setTimeout(this.setInitial, 1000);
   }

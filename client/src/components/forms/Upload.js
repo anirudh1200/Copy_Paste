@@ -20,14 +20,14 @@ class UploadForm extends Component {
 		this.setState({ [e.target.name]: e.target.value });
 	}
 
-	handleAceChange = (value) => {
-		this.setState({ pasteData: value.replace(/\t/g, "    ") });
+	handleSubmit = () => {
+		let pasteData = this.state.editor.getValue().replace(/\t/g, "    ");
+		this.setState({ pasteData }, this.upload);
 	}
 
-	handleSubmit = () => {
-		console.log(this.state.pasteData);
+	upload = () => {
 		if (this.validateForm()) {
-			let { status, ...data } = this.state;
+			let { editor, status, ...data } = this.state;
 			console.log(data);
 			fetch("/d/upload", {
 				method: 'POST',
@@ -44,6 +44,10 @@ class UploadForm extends Component {
 				})
 				.catch(console.log);
 		}
+	}
+
+	getEditor = (editor) => {
+		this.setState({ editor });
 	}
 
 	validateForm = () => {
@@ -86,14 +90,15 @@ class UploadForm extends Component {
 					<AceEditor
 						initialValue={''}
 						name="pasteData"
-						onChange={this.handleAceChange}
+						getEditor={this.getEditor}
+						numberOfLines={30}
 					/>
 					<TextField
 						disabled
 						id="standard-disabled"
 						value="codebinn.herokuapp.com/d/"
 						margin="normal"
-						style={{ maxWidth: '58%' }}
+						style={{ maxWidth: '62%' }}
 					/>
 					<TextField
 						id="standard-name"
@@ -102,7 +107,7 @@ class UploadForm extends Component {
 						name="url"
 						onChange={this.handleChange}
 						margin="none"
-						style={{ maxWidth: '40%' }}
+						style={{ maxWidth: '36%' }}
 					/>
 					<div style={{ marginTop: '2%', textAlign: 'center', marginBottom: '30px' }}>
 						<div style={{ color: 'red' }}>{this.state.status}</div>

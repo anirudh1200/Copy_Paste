@@ -19,14 +19,22 @@ router.post('/upload', (req, res) => {
     // Create a new .txt file containing the data
     const txtFilePath = path.resolve(__dirname + '/../files/', req.body.url + '.txt');
     fs.writeFile(txtFilePath, req.body.pasteData, (err) => console.log(err));
-    // Add url to database
-    const newPaste = new Paste({
-        url: req.body.url,
-        date: req.body.date
-    });
-    newPaste.save()
-        .then(a => res.status(200).json({ success: true }))
-        .catch(console.log);
+    Paste.findOne({ url: req.body.url })
+        .then(foundPaste => {
+            if (foundPaste) {
+                // File already exists and so no need to make new database entry
+                res.status(200).json({ success: true });
+            } else {
+                // Add url to database
+                const newPaste = new Paste({
+                    url: req.body.url,
+                    date: req.body.date
+                });
+                newPaste.save()
+                    .then(a => res.status(200).json({ success: true }))
+                    .catch(console.log);
+            }
+        });
 });
 
 // @route   GET /d/:url
@@ -149,7 +157,7 @@ router.get('/view/:url', (req, res) => {
     fs.exists(file, (exists) => {
         if (exists) {
             let pasteData = fs.readFileSync(file, "utf8");
-            res.json({pasteData});
+            res.json({ pasteData });
         } else {
             res.redirect('/error');
         }

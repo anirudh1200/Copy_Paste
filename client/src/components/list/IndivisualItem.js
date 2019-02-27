@@ -49,9 +49,9 @@ class IndivisualItem extends Component {
 		}
 	}
 
-	redirectToView = () => {
+	redirect = (location) => {
 		let url = this.props.paste.url;
-		this.props.history.push(`/view/${url}`);
+		this.props.history.push(`/` + location + `/${url}`);
 	}
 
 	handleMouseEnter = () => {
@@ -100,7 +100,11 @@ class IndivisualItem extends Component {
 				/>
 				<VisibilityIcon
 					style={iconStyle}
-					onClick={this.redirectToView}
+					onClick={() => this.redirect('edit')}
+				/>
+				<VisibilityIcon
+					style={iconStyle}
+					onClick={() => this.redirect('view')}
 				/>
 				<ArrowDownward
 					style={iconStyle}

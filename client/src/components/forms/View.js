@@ -23,8 +23,8 @@ class View extends Component {
 			.catch(console.log);
 	}
 
-	handleAceChange = (value) => {
-		this.setState({ pasteData: value.replace(/\t/g, "    ") });
+	getEditor = (editor) => {
+		// Do Nothing
 	}
 
 	render() {
@@ -36,13 +36,14 @@ class View extends Component {
 				>
 					{this.state.url}
 				</Typography>
-				<form autoComplete="off" style={{ width: '80%', margin: '0% 8%' }}>
+				<div style={{ width: '90%', margin: '0% 4%' }}>
 					<AceEditor
 						initialValue={this.state.pasteData}
 						name="pasteData"
-						onChange={this.handleAceChange}
+						getEditor={this.getEditor}
+						numberOfLines={36}
 					/>
-				</form>
+				</div>
 			</Fragment>
 		)
 	}
