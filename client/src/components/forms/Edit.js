@@ -19,7 +19,7 @@ class Edit extends Component {
 	}
 
 	getData = (url) => {
-		fetch(`http://localhost:5000/d/view/${url}`)
+		fetch(`/d/view/${url}`)
 			.then(res => res.json())
 			.then(res => this.setState({ pasteData: res.pasteData }))
 			.catch(console.log);
