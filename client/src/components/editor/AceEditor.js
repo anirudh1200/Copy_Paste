@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { findDOMNode } from 'react-dom';
+import Dropdown from './Dropdown';
 
 class AceEditor extends Component {
 
@@ -30,9 +31,12 @@ class AceEditor extends Component {
   render() {
     const style = { fontSize: '14px !important', border: '1px solid lightgray' };
     return (
-      <div ref="root" style={style}>
-        {this.props.code}
-      </div>
+      <Fragment>
+        <Dropdown />
+        <div ref="root" style={style}>
+          {this.props.code}
+        </div>
+      </Fragment>
     );
   }
 }
