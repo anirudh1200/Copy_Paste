@@ -1,58 +1,117 @@
 import React from 'react';
-import './Dropdown.css';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Button from '@material-ui/core/Button';
+
+const options = [
+	'c',
+	'c#',
+	'clojure',
+	'cobol',
+	'coffee',
+	'cpp',
+	'css',
+	'dart',
+	'django',
+	'ejs',
+	'elixir',
+	'erlang',
+	'f#',
+	'fortran',
+	'golang',
+	'groovy',
+	'haml',
+	'haskell',
+	'html',
+	'java',
+	'javascript',
+	'json',
+	'jsx',
+	'julia',
+	'kotlin',
+	'less',
+	'lua',
+	'matlab',
+	'mysql',
+	'objectivec',
+	'pascal',
+	'perl',
+	'perl6',
+	'pgsql',
+	'php',
+	'plaintext',
+	'prolong',
+	'python',
+	'r',
+	'ruby',
+	'rust',
+	'sass',
+	'scala',
+	'scss',
+	'sql',
+	'svg',
+	'swift',
+	'text',
+	'tsx',
+	'typescript',
+	'xml'
+];
+
+const ITEM_HEIGHT = 48;
 
 class Dropdown extends React.Component {
-constructor(){
- super();
+	state = {
+		anchorEl: null,
+		language: 'plaintext'
+	};
 
- this.state = {
-       displayMenu: false,
-     };
+	handleClick = event => {
+		this.setState({ anchorEl: event.currentTarget });
+	};
 
-  this.showDropdownMenu = this.showDropdownMenu.bind(this);
-  this.hideDropdownMenu = this.hideDropdownMenu.bind(this);
+	handleClose = (language) => {
+		this.props.changeLanguage(language);
+		this.setState({
+			anchorEl: null,
+			language
+		});
+	};
 
-};
+	render() {
+		const { anchorEl } = this.state;
+		const open = Boolean(anchorEl);
 
-showDropdownMenu(event) {
-    event.preventDefault();
-    this.setState({ displayMenu: true }, () => {
-    document.addEventListener('click', this.hideDropdownMenu);
-    });
-  }
-
-  hideDropdownMenu() {
-    this.setState({ displayMenu: false }, () => {
-      document.removeEventListener('click', this.hideDropdownMenu);
-    });
-
-  }
-
-  render() {
-    return (
-        <div  className="dropdown" style = {{background:"red",width:"200px"}} >
-         <div className="button" onClick={this.showDropdownMenu}> My Setting </div>
-
-          { this.state.displayMenu ? (
-          <ul>
-         <li><a className="active" href="#Create Page">Create Page</a></li>
-         <li><a href="#Manage Pages">Manage Pages</a></li>
-         <li><a href="#Create Ads">Create Ads</a></li>
-         <li><a href="#Manage Ads">Manage Ads</a></li>
-         <li><a href="#Activity Logs">Activity Logs</a></li>
-         <li><a href="#Setting">Setting</a></li>
-         <li><a href="#Log Out">Log Out</a></li>
-          </ul>
-        ):
-        (
-          null
-        )
-        }
-
-       </div>
-
-    );
-  }
+		return (
+			<div>
+				<Button
+					aria-label="More"
+					aria-owns={open ? 'long-menu' : undefined}
+					aria-haspopup="true"
+					onClick={this.handleClick}
+				>
+					{this.state.language}
+				</Button>
+				<Menu
+					id="long-menu"
+					anchorEl={anchorEl}
+					open={open}
+					onClose={this.handleClose}
+					PaperProps={{
+						style: {
+							maxHeight: ITEM_HEIGHT * 4.5,
+							width: 200,
+						},
+					}}
+				>
+					{options.map(option => (
+						<MenuItem key={option} selected={option === this.state.language} onClick={() => this.handleClose(option)}>
+							{option}
+						</MenuItem>
+					))}
+				</Menu>
+			</div>
+		);
+	}
 }
 
 export default Dropdown;

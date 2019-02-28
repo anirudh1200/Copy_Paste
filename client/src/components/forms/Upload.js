@@ -86,7 +86,7 @@ class UploadForm extends Component {
 				>
 					Upload Your Paste
         </Typography>
-				<form autoComplete="off" style={{ width: '80%', margin: '0% 8%' }}>
+				<form autoComplete="off" style={{ width: '90%', margin: '0% 5%' }}>
 					<AceEditor
 						initialValue={''}
 						name="pasteData"
@@ -98,7 +98,7 @@ class UploadForm extends Component {
 						id="standard-disabled"
 						value="codebinn.herokuapp.com/d/"
 						margin="normal"
-						style={{ maxWidth: '62%' }}
+						style={{ maxWidth: '62%', width: '210px' }}
 					/>
 					<TextField
 						id="standard-name"

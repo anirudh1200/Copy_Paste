@@ -46,7 +46,7 @@ class PasteList extends Component {
 		});
 		return (
 			<div style={{ margin: '0% 5%' }}>
-				<List>
+				<List style={{width: '100%'}}>
 					<ListItem>
 						<ListItemText />
 						<p style={headingStyle}>Edit</p>

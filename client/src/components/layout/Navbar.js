@@ -52,7 +52,7 @@ function SimpleAppBar(props) {
           </Link>
         </Toolbar>
       </AppBar>
-      {count};
+      {count}
     </div>
   );
 }

@@ -7,6 +7,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import grey from '@material-ui/core/colors/grey';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CodeIcon from '@material-ui/icons/Code';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
 class IndivisualItem extends Component {
@@ -98,7 +99,7 @@ class IndivisualItem extends Component {
 					primary={paste.url}
 					secondary={paste.date}
 				/>
-				<VisibilityIcon
+				<CodeIcon
 					style={iconStyle}
 					onClick={() => this.redirect('edit')}
 				/>

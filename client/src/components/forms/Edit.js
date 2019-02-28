@@ -67,7 +67,7 @@ class Edit extends Component {
 						initialValue={this.state.pasteData}
 						name="pasteData"
 						getEditor={this.getEditor}
-						numberOfLines={34}
+						numberOfLines={33}
 					/>
 					<div style={{ marginTop: '2%', textAlign: 'center', marginBottom: '30px' }}>
 						<div style={{ color: 'red' }}>{this.state.status}</div>
