@@ -20,11 +20,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //=======================
 
 // for development
-// const db = 'mongodb://localhost/copyPaste';
+const db = 'mongodb://localhost/copyPaste';
 // for production
 // const db = require('./config/keys').mongoURI;
 // for heroku using congfig vars
-const db = process.env.COPY_DATABASE_URL;
+// const db = process.env.COPY_DATABASE_URL;
 mongoose.connect(db, { useNewUrlParser: true })
     .then(() => console.log("Database connected"))
     .catch(console.log);
