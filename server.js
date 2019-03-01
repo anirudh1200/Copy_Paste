@@ -10,7 +10,6 @@ const express       = require('express'),
 // MIDDLEWARE
 //=======================
 
-app.use(express.static(path.resolve(__dirname, "client")));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 // app.use(logger('dev'));
@@ -44,7 +43,7 @@ mongoose.connect(db, { useNewUrlParser: true })
 //=======================
 
 app.use("/d/", Routes);
-
+console.log(process.env.NODE_ENV);
 // Serve static assets if in production
 if (process.env.NODE_ENV == 'production') {
     //Set static folder
