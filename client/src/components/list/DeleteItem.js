@@ -15,17 +15,23 @@ class DeleteItem extends Component {
 
 	handleDelete = () => {
 		let url = this.props.paste.url;
-		fetch(`/d/delete/${url}`)
+		// development
+		fetch(`http://localhost:5000/d/delete/${url}`)
+		// production
+		// fetch(`/d/delete/${url}`)
 			.then(res => res.json())
 			.then(res => {
 				if (res.success) {
-					console.log("Successful");
+					this.props.displayChip({type: 'success', displayText: 'Deleted Successfully !!'});
 					this.props.handleDelete(url);
 				} else {
-					console.log("Unsuccessful");
+					this.props.displayChip({type: 'fail'});
 				}
 			})
-			.catch(console.log);
+			.catch(err => {
+				console.log(err);
+				this.props.displayChip({type: 'fail'});
+			});
 	}
 
 	handleMouseEnter = () => {

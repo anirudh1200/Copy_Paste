@@ -20,18 +20,16 @@ export default class DeleteModal extends React.Component {
 	};
 
 	handleChange = e => {
-		console.log(this.state);
 		this.setState({ [e.target.name]: e.target.value });
 	}
 
 	handleLogin = () => {
 		if (this.validateForm()) {
 			let { open, status, ...data } = this.state;
-			console.log(data);
 			// Develpoment
-			// fetch("http://localhost:5000/auth/login", {
+			fetch("http://localhost:5000/auth/login", {
 			// Production
-			fetch("/auth/login", {
+			// fetch("/auth/login", {
 				method: 'POST',
 				headers: {
 					"Content-Type": "application/json;charset=UTF-8"

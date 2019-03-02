@@ -43,10 +43,16 @@ class Edit extends Component {
 			.then(res => res.json())
 			.then(res => {
 				if (res.success) {
+					this.props.displayChip({type: 'success', displayText: 'File Edited Successfully'});
 					this.props.history.push('/');
+				} else {
+					this.props.displayChip({type: 'fail'});
 				}
 			})
-			.catch(console.log);
+			.catch(err => {
+				console.log(err);
+				this.props.displayChip({type: 'fail'});
+			});
 	}
 
 	getEditor = (editor) => {
@@ -67,7 +73,7 @@ class Edit extends Component {
 						initialValue={this.state.pasteData}
 						name="pasteData"
 						getEditor={this.getEditor}
-						numberOfLines={33}
+						numberOfLines={36}
 					/>
 					<div style={{ marginTop: '2%', textAlign: 'center', marginBottom: '30px' }}>
 						<div style={{ color: 'red' }}>{this.state.status}</div>

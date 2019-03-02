@@ -41,7 +41,7 @@ class View extends Component {
 						initialValue={this.state.pasteData}
 						name="pasteData"
 						getEditor={this.getEditor}
-						numberOfLines={36}
+						numberOfLines={40}
 					/>
 				</div>
 			</Fragment>

@@ -28,8 +28,10 @@ class UploadForm extends Component {
 	upload = () => {
 		if (this.validateForm()) {
 			let { editor, status, ...data } = this.state;
-			console.log(data);
-			fetch("/d/upload", {
+			// Development
+			fetch("http://localhost:5000/d/upload", {
+			// Production
+			// fetch("/d/upload", {
 				method: 'POST',
 				headers: {
 					"Content-Type": "application/json;charset=UTF-8"
@@ -39,10 +41,16 @@ class UploadForm extends Component {
 				.then(res => res.json())
 				.then(res => {
 					if (res.success) {
+						this.props.displayChip({type: 'success', displayText: 'Uploaded Successfully !!'});
 						this.props.history.push('/');
+					} else {
+						this.props.displayChip({type: 'fail'});
 					}
 				})
-				.catch(console.log);
+				.catch(err => {
+					console.log(err);
+					this.props.displayChip({type: 'fail'});
+				});
 		}
 	}
 
@@ -91,7 +99,7 @@ class UploadForm extends Component {
 						initialValue={''}
 						name="pasteData"
 						getEditor={this.getEditor}
-						numberOfLines={30}
+						numberOfLines={34}
 					/>
 					<TextField
 						disabled

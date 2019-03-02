@@ -11,14 +11,15 @@ import DeleteModal from '../misc/DeleteModal';
 class DeletePanel extends Component {
 
 	state = {
-		pasteList: []
+		pasteList: [],
+		chip: ''
 	}
 
 	componentDidMount = () => {
 		// Development
-		// fetch('http://localhost:5000/d/download')
+		fetch('http://localhost:5000/d/download')
 		// Production
-		fetch('/d/download')
+		// fetch('/d/download')
 			.then(res => res.json())
 			.then(res => this.setState({
 				pasteList: res
@@ -44,6 +45,7 @@ class DeletePanel extends Component {
 					paste={paste}
 					key={i}
 					handleDelete={this.handleDelete}
+					displayChip={this.props.displayChip}
 				/>
 			)
 		});

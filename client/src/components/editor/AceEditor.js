@@ -19,7 +19,7 @@ class AceEditor extends Component {
     editor.setShowPrintMargin(false);
     editor.setOptions({ minLines: this.props.numberOfLines });
     editor.setOptions({ maxLines: this.props.numberOfLines });
-    editor.setOption('fontSize', 20);
+    editor.setOption('fontSize', 18);
     this.props.getEditor(editor);
     editor.setValue(this.state.editorText, -1);
     setTimeout(this.setInitial, 1000);
