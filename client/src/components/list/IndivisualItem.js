@@ -6,7 +6,6 @@ import Avatar from '@material-ui/core/Avatar';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import grey from '@material-ui/core/colors/grey';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
-import DeleteIcon from '@material-ui/icons/Delete';
 import CodeIcon from '@material-ui/icons/Code';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 
@@ -63,21 +62,6 @@ class IndivisualItem extends Component {
 		this.setState({ isHovered: false });
 	}
 
-	handleDelete = () => {
-		let url = this.props.paste.url;
-		fetch(`/d/delete/${url}`)
-			.then(res => res.json())
-			.then(res => {
-				if (res.success) {
-					console.log("Successful");
-					this.props.handleDelete(url);
-				} else {
-					console.log("Unsuccessful");
-				}
-			})
-			.catch(console.log);
-	}
-
 	render() {
 		const { paste } = this.props;
 		let listItemStyle;
@@ -114,10 +98,6 @@ class IndivisualItem extends Component {
 				<ArrowDownward
 					style={iconStyle}
 					onClick={() => this.downloadFile('.pdf')}
-				/>
-				<DeleteIcon
-					style={iconStyle}
-					onClick={this.handleDelete}
 				/>
 			</ListItem>
 		)

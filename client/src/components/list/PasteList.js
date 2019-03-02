@@ -14,7 +14,10 @@ class PasteList extends Component {
 	}
 
 	componentDidMount = () => {
-		fetch('/d/download')
+		// Development
+		fetch('http://localhost:5000/d/download')
+		// Production
+		// fetch('/d/download')
 			.then(res => res.json())
 			.then(res => this.setState({
 				pasteList: res
@@ -23,12 +26,6 @@ class PasteList extends Component {
 
 	redirectToUpload = () => {
 		this.props.history.push('/uploadform');
-	}
-	handleDelete = (url) => {
-		let newPasteList = this.state.pasteList.filter(paste => {
-			return paste.url !== url
-		});
-		this.setState({ pasteList: newPasteList });
 	}
 
 	render() {
@@ -40,7 +37,6 @@ class PasteList extends Component {
 					paste={paste}
 					key={i}
 					history={this.props.history}
-					handleDelete={this.handleDelete}
 				/>
 			)
 		});
@@ -53,7 +49,6 @@ class PasteList extends Component {
 						<p style={headingStyle}>View</p>
 						<p style={headingStyle}>.txt</p>
 						<p style={headingStyle}>.pdf</p>
-						<p style={headingStyle}>Delete</p>
 					</ListItem>
 					{list}
 				</List>
@@ -70,4 +65,3 @@ class PasteList extends Component {
 }
 
 export default PasteList;
-

@@ -4,8 +4,8 @@ const express       = require('express'),
       mongoose      = require('mongoose'),
       path          = require('path'),
     //logger        = require('morgan'),
-      Routes        = require('./routes/routes.js');
-
+      fileRoutes    = require('./routes/fileRoutes.js'),
+      authRoutes    = require('./routes/authRoutes');
 //=======================
 // MIDDLEWARE
 //=======================
@@ -19,11 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //=======================
 
 // for development
-// const db = 'mongodb://localhost/copyPaste';
+const db = 'mongodb://localhost/copyPaste';
 // for production
 // const db = require('./config/keys').mongoURI;
 // for heroku using congfig vars
-const db = process.env.COPY_DATABASE_URL;
+// const db = process.env.COPY_DATABASE_URL;
 mongoose.connect(db, { useNewUrlParser: true })
     .then(() => console.log("Database connected"))
     .catch(console.log);
@@ -42,28 +42,14 @@ mongoose.connect(db, { useNewUrlParser: true })
 // ROUTES
 //=======================
 
-app.use("/d/", Routes);
-console.log(process.env.NODE_ENV);
+app.use("/d/", fileRoutes);
+
+app.use("/auth/", authRoutes);
+
 // Serve static assets if in production
 if (process.env.NODE_ENV == 'production') {
     //Set static folder
     app.use(express.static(path.join(__dirname, 'client', 'build')));
-
-    app.get('/static/js/1.bba9385f.chunk.js', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'static', 'js', '1.bba9385f.chunk.js'));
-    });
-
-    app.get('/static/js/1.bba9385f.chunk.js', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'static', 'js', '1.bba9385f.chunk.js'));
-    });
-
-    app.get('/static/js/main.94e49c87.chunk.js', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'static', 'js', 'main.94e49c87.chunk.js'));
-    });
-
-    app.get('/static/css/main.4f139763.chunk.css', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'static', 'css', 'main.4f139763.chunk.css'));
-    });
 
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));

@@ -6,7 +6,8 @@ import UploadForm from './components/forms/Upload';
 import Home from './components/layout/Home';
 import NotFound from './components/misc/NotFound';
 import View from './components/forms/View';
-import Edit from './components/forms/Edit'
+import Edit from './components/forms/Edit';
+import DeletePanel from './components/list/DeletePanel';
 
 class App extends Component {
 
@@ -21,6 +22,7 @@ class App extends Component {
           <Route exact path='/error' component={NotFound} />
           <Route path='/view' component={View} />
           <Route path='/edit' component={Edit} />
+          <Route path='/delete' component={DeletePanel} />
         </Switch>
         <span style={{ position: 'fixed', bottom: 0 }}>
           Made with
