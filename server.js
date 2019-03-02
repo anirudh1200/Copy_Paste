@@ -19,11 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //=======================
 
 // for development
-const db = 'mongodb://localhost/copyPaste';
+// const db = 'mongodb://localhost/copyPaste';
 // for production
 // const db = require('./config/keys').mongoURI;
 // for heroku using congfig vars
-// const db = process.env.COPY_DATABASE_URL;
+const db = process.env.COPY_DATABASE_URL;
 mongoose.connect(db, { useNewUrlParser: true })
     .then(() => console.log("Database connected"))
     .catch(console.log);
@@ -48,12 +48,11 @@ app.use("/auth/", authRoutes);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV == 'production') {
-    //Set static folder
-    app.use(express.static(path.join(__dirname, 'client', 'build')));
+    app.use(express.static(path.join(__dirname, 'build')));
 
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
+    app.get('/*', function (req, res) {
+       res.sendFile(path.join(__dirname, 'build', 'index.html'));
+     });
 }
 
 //=======================
