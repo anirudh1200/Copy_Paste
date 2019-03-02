@@ -3,7 +3,7 @@ const express       = require('express'),
       bodyParser    = require('body-parser'),
       mongoose      = require('mongoose'),
       path          = require('path'),
-    //   logger        = require('morgan'),
+    //logger        = require('morgan'),
       Routes        = require('./routes/routes.js');
 
 //=======================
@@ -48,6 +48,22 @@ console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV == 'production') {
     //Set static folder
     app.use(express.static(path.join(__dirname, 'client', 'build')));
+
+    app.get('/static/js/1.bba9385f.chunk.js', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'static', 'js', '1.bba9385f.chunk.js'));
+    });
+
+    app.get('/static/js/1.bba9385f.chunk.js', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'static', 'js', '1.bba9385f.chunk.js'));
+    });
+
+    app.get('/static/js/main.94e49c87.chunk.js', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'static', 'js', 'main.94e49c87.chunk.js'));
+    });
+
+    app.get('/static/css/main.4f139763.chunk.css', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'static', 'css', 'main.4f139763.chunk.css'));
+    });
 
     app.get('*', (req, res) => {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
