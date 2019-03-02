@@ -27,9 +27,9 @@ export default class DeleteModal extends React.Component {
 		if (this.validateForm()) {
 			let { open, status, ...data } = this.state;
 			// Develpoment
-			fetch("http://localhost:5000/auth/login", {
+			// fetch("http://localhost:5000/auth/login", {
 			// Production
-			// fetch("/auth/login", {
+			fetch("/auth/login", {
 				method: 'POST',
 				headers: {
 					"Content-Type": "application/json;charset=UTF-8"

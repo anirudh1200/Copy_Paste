@@ -29,9 +29,9 @@ class UploadForm extends Component {
 		if (this.validateForm()) {
 			let { editor, status, ...data } = this.state;
 			// Development
-			fetch("http://localhost:5000/d/upload", {
+			// fetch("http://localhost:5000/d/upload", {
 			// Production
-			// fetch("/d/upload", {
+			fetch("/d/upload", {
 				method: 'POST',
 				headers: {
 					"Content-Type": "application/json;charset=UTF-8"

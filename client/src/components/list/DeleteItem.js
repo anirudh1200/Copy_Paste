@@ -16,9 +16,9 @@ class DeleteItem extends Component {
 	handleDelete = () => {
 		let url = this.props.paste.url;
 		// development
-		fetch(`http://localhost:5000/d/delete/${url}`)
+		// fetch(`http://localhost:5000/d/delete/${url}`)
 		// production
-		// fetch(`/d/delete/${url}`)
+		fetch(`/d/delete/${url}`)
 			.then(res => res.json())
 			.then(res => {
 				if (res.success) {
