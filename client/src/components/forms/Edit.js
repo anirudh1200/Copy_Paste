@@ -9,7 +9,10 @@ class Edit extends Component {
 
 	state = {
 		pasteData: '',
-		url: ''
+		url: '',
+		language: '',
+		dropdown: '',
+		editor: ''
 	}
 
 	componentDidMount = () => {
@@ -21,7 +24,11 @@ class Edit extends Component {
 	getData = (url) => {
 		fetch(`/d/view/${url}`)
 			.then(res => res.json())
-			.then(res => this.setState({ pasteData: res.pasteData }))
+			.then(res => {
+				this.state.editor.setValue(res.pasteData);
+				this.state.editor.getSession().setMode(`ace/mode/${res.language}`);
+				this.state.dropdown.setState({ language: res.language });
+			})
 			.catch(console.log);
 	}
 
@@ -30,10 +37,13 @@ class Edit extends Component {
 		this.setState({ pasteData }, this.upload);
 	}
 
+	handleLanguageChange = language => {
+		this.setState({ language });
+	}
+
 	upload = () => {
-		let { editor, status, ...data } = this.state;
-		console.log(data);
-		fetch("/d/upload", {
+		let {dropdown, editor, ...data} = this.state;
+		fetch("/d/edit", {
 			method: 'POST',
 			headers: {
 				"Content-Type": "application/json;charset=UTF-8"
@@ -43,20 +53,24 @@ class Edit extends Component {
 			.then(res => res.json())
 			.then(res => {
 				if (res.success) {
-					this.props.displayChip({type: 'success', displayText: 'File Edited Successfully'});
+					this.props.displayChip({ type: 'success', displayText: 'File Edited Successfully' });
 					this.props.history.push('/');
 				} else {
-					this.props.displayChip({type: 'fail'});
+					this.props.displayChip({ type: 'fail' });
 				}
 			})
 			.catch(err => {
 				console.log(err);
-				this.props.displayChip({type: 'fail'});
+				this.props.displayChip({ type: 'fail' });
 			});
 	}
 
 	getEditor = (editor) => {
 		this.setState({ editor });
+	}
+
+	getDropdown = dropdown => {
+		this.setState({ dropdown });
 	}
 
 	render() {
@@ -74,6 +88,8 @@ class Edit extends Component {
 						name="pasteData"
 						getEditor={this.getEditor}
 						numberOfLines={36}
+						handleLanguageChange={this.handleLanguageChange}
+						getDropdown={this.getDropdown}
 					/>
 					<div style={{ marginTop: '2%', textAlign: 'center', marginBottom: '30px' }}>
 						<div style={{ color: 'red' }}>{this.state.status}</div>

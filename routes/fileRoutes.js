@@ -16,25 +16,35 @@ router.get('/download', (req, res) => {
 // @route   GET /d/upload
 // @desc    stores the data in a newly created txt file
 router.post('/upload', (req, res) => {
-    // Create a new .txt file containing the data
-    const txtFilePath = path.resolve(__dirname + '/../files/', req.body.url + '.txt');
-    fs.writeFile(txtFilePath, req.body.pasteData, (err) => console.log(err));
     Paste.findOne({ url: req.body.url })
         .then(foundPaste => {
             if (foundPaste) {
-                // File already exists and so no need to make new database entry
-                res.status(200).json({ success: true });
+                // File already exists send warning notifying it
+                res.status(200).json({ success: false, status: 'URL already exists' });
             } else {
+                // Create a new .txt file containing the data
+                const txtFilePath = path.resolve(__dirname + '/../files/', req.body.url + '.txt');
+                fs.writeFile(txtFilePath, req.body.pasteData, (err) => console.log(err));
                 // Add url to database
                 const newPaste = new Paste({
                     url: req.body.url,
-                    date: req.body.date
+                    date: req.body.date,
+                    language: req.body.language
                 });
                 newPaste.save()
                     .then(a => res.status(200).json({ success: true }))
                     .catch(console.log);
             }
         });
+});
+
+// @route   GET /d/edit
+// @desc    stores the edited data in a newly created txt file
+router.post('/edit', (req, res) => {
+    // Create a new .txt file containing the data
+    const txtFilePath = path.resolve(__dirname + '/../files/', req.body.url + '.txt');
+    fs.writeFile(txtFilePath, req.body.pasteData, (err) => console.log(err));
+    res.status(200).json({ success: true });
 });
 
 // @route   GET /d/:url
@@ -154,10 +164,14 @@ router.get('/delete/:url', (req, res) => {
 router.get('/view/:url', (req, res) => {
     const fileName = req.params.url + '.txt';
     const file = path.resolve(__dirname + '/../files/', fileName);
+    let language;
     fs.exists(file, (exists) => {
         if (exists) {
-            let pasteData = fs.readFileSync(file, "utf8");
-            res.json({ pasteData });
+            Paste.findOne({ url: req.params.url })
+                .then(foundPaste => {
+                    let pasteData = fs.readFileSync(file, "utf8");
+                    res.json({ pasteData, language: foundPaste.language })
+                });
         } else {
             res.redirect('/error');
         }

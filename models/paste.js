@@ -5,7 +5,8 @@ const pasteSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    date: String
+    date: String,
+    language: String
 });
 
 module.exports = mongoose.model('Paste', pasteSchema);

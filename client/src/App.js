@@ -23,15 +23,15 @@ class App extends Component {
   createChip = ({type, displayText}) => {
     if (type === 'success') {
       return <Chip 
-                style={{fontSize: '1.1em', color: grey[50], backgroundColor: grey[900]}}
+                style={{fontSize: '1.1em', color: grey[50], backgroundColor: grey[800]}}
                 label={displayText}
-                avatar={<Avatar style={{color: grey[50], backgroundColor: grey[900]}}><DoneIcon /></Avatar>}
+                avatar={<Avatar style={{color: grey[50], backgroundColor: grey[800]}}><DoneIcon /></Avatar>}
               />
     }
     return <Chip
-              style={{fontSize: '1.1em', color: grey[50], backgroundColor: grey[900]}}
+              style={{fontSize: '1.1em', color: grey[50], backgroundColor: grey[800]}}
               label="An Error Occured"
-              avatar={<Avatar style={{color: grey[50], backgroundColor: grey[900]}}><ClearIcon /></Avatar>}
+              avatar={<Avatar style={{color: grey[50], backgroundColor: grey[800]}}><ClearIcon /></Avatar>}
             />
   }
 
@@ -40,7 +40,7 @@ class App extends Component {
     this.setState({ chip });
     setTimeout(() => {
       this.setState({ chip: '' })
-    }, 100000);
+    }, 2000);
   }
 
   render() {

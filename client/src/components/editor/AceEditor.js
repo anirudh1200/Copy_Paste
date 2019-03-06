@@ -20,17 +20,12 @@ class AceEditor extends Component {
     editor.setOptions({ minLines: this.props.numberOfLines });
     editor.setOptions({ maxLines: this.props.numberOfLines });
     editor.setOption('fontSize', 18);
-    this.props.getEditor(editor);
     editor.setValue(this.state.editorText, -1);
-    setTimeout(this.setInitial, 1000);
-  }
-
-  setInitial = () => {
-    this.state.editor.setValue(this.props.initialValue, -1);
+    this.props.getEditor(editor);
   }
 
   changeLanguage = language => {
-    switch(language){
+    switch (language) {
       case 'c':
       case 'cpp':
         language = 'c_cpp';
@@ -44,10 +39,10 @@ class AceEditor extends Component {
       case 'plaintext':
         language = 'plain_text';
         break;
-      default: console.log(language);
+      default: break;
     }
-    console.log(language);
     this.state.editor.getSession().setMode(`ace/mode/${language}`);
+    this.props.handleLanguageChange(language);
   }
 
   render() {
@@ -57,6 +52,7 @@ class AceEditor extends Component {
         <Dropdown
           style={{ marginLeft: '30%' }}
           changeLanguage={this.changeLanguage}
+          getDropdown={this.props.getDropdown}
         />
         <div ref="root" style={style}>
           {this.props.code}

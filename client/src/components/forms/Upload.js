@@ -13,7 +13,9 @@ class UploadForm extends Component {
 		pasteData: '',
 		url: '',
 		date: formatDate(new Date()),
-		status: ''
+		status: '',
+		language: 'plain_text',
+		editor: ''
 	}
 
 	handleChange = e => {
@@ -23,6 +25,14 @@ class UploadForm extends Component {
 	handleSubmit = () => {
 		let pasteData = this.state.editor.getValue().replace(/\t/g, "    ");
 		this.setState({ pasteData }, this.upload);
+	}
+
+	handleLanguageChange = language => {
+		this.setState({ language });
+	}
+
+	getDropdown = dropdown => {
+		// Do Nothing
 	}
 
 	upload = () => {
@@ -41,21 +51,24 @@ class UploadForm extends Component {
 				.then(res => res.json())
 				.then(res => {
 					if (res.success) {
-						this.props.displayChip({type: 'success', displayText: 'Uploaded Successfully !!'});
+						this.props.displayChip({ type: 'success', displayText: 'Uploaded Successfully !!' });
 						this.props.history.push('/');
+					} else if (res.status) {
+						this.setState({ status: res.status })
 					} else {
-						this.props.displayChip({type: 'fail'});
+						this.props.displayChip({ type: 'fail' });
 					}
 				})
 				.catch(err => {
 					console.log(err);
-					this.props.displayChip({type: 'fail'});
+					this.props.displayChip({ type: 'fail' });
 				});
 		}
 	}
 
 	getEditor = (editor) => {
 		this.setState({ editor });
+		editor.setValue('');
 	}
 
 	validateForm = () => {
@@ -100,6 +113,8 @@ class UploadForm extends Component {
 						name="pasteData"
 						getEditor={this.getEditor}
 						numberOfLines={34}
+						handleLanguageChange={this.handleLanguageChange}
+						getDropdown={this.getDropdown}
 					/>
 					<TextField
 						disabled

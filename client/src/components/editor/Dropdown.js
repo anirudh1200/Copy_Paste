@@ -40,7 +40,7 @@ const options = [
 	'pgsql',
 	'php',
 	'plaintext',
-	'prolong',
+	'prolog',
 	'python',
 	'r',
 	'ruby',
@@ -65,16 +65,16 @@ class Dropdown extends React.Component {
 		language: 'plaintext'
 	};
 
+	componentDidMount = () => {
+		this.props.getDropdown(this);
+	}
+
 	handleClick = event => {
 		this.setState({ anchorEl: event.currentTarget });
 	};
 
-	handleClose = (language) => {
-		this.props.changeLanguage(language);
-		this.setState({
-			anchorEl: null,
-			language
-		});
+	handleClose = () => {
+		this.setState({ anchorEl: null });
 	};
 
 	render() {
@@ -98,13 +98,21 @@ class Dropdown extends React.Component {
 					onClose={this.handleClose}
 					PaperProps={{
 						style: {
-							maxHeight: ITEM_HEIGHT * 4.5,
+							maxHeight: ITEM_HEIGHT * 5.5,
 							width: 200,
 						},
 					}}
 				>
 					{options.map(option => (
-						<MenuItem key={option} selected={option === this.state.language} onClick={() => this.handleClose(option)}>
+						<MenuItem
+							key={option}
+							selected={option === this.state.language}
+							onClick={() => {
+								this.handleClose();
+								this.setState({ language: option });
+								this.props.changeLanguage(option);
+							}}
+						>
 							{option}
 						</MenuItem>
 					))}

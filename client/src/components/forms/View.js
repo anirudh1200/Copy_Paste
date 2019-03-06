@@ -6,8 +6,9 @@ import AceEditor from '../editor/AceEditor';
 class View extends Component {
 
 	state = {
-		pasteData: '',
-		url: ''
+		url: '',
+		editor: '',
+		dropdown: ''
 	}
 
 	componentDidMount = () => {
@@ -19,12 +20,24 @@ class View extends Component {
 	getData = (url) => {
 		fetch(`/d/view/${url}`)
 			.then(res => res.json())
-			.then(res => this.setState({ pasteData: res.pasteData }))
+			.then(res => {
+				this.state.editor.setValue(res.pasteData);
+				this.state.editor.getSession().setMode(`ace/mode/${res.language}`);
+				this.state.dropdown.setState({ language: res.language });
+			})
 			.catch(console.log);
 	}
 
 	getEditor = (editor) => {
-		// Do Nothing
+		this.setState({ editor })
+	}
+
+	handleLanguageChange = language => {
+		// Do nothing
+	}
+
+	getDropdown = dropdown => {
+		this.setState({ dropdown });
 	}
 
 	render() {
@@ -38,10 +51,11 @@ class View extends Component {
 				</Typography>
 				<div style={{ width: '90%', margin: '0% 4%' }}>
 					<AceEditor
-						initialValue={this.state.pasteData}
 						name="pasteData"
 						getEditor={this.getEditor}
 						numberOfLines={40}
+						handleLanguageChange={this.handleLanguageChange}
+						getDropdown={this.getDropdown}
 					/>
 				</div>
 			</Fragment>
